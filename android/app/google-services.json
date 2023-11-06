@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "846191403073",
+    "project_id": "mypetstore-5bda2",
+    "storage_bucket": "mypetstore-5bda2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846191403073:android:6cd51d099094b1dadd26c0",
+        "android_client_info": {
+          "package_name": "com.example.petstore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmmghoGvq0HOjl1_tZk8JcZcvIZl6MgdM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
