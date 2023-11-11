@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterClass extends StatefulWidget {
   State<RegisterClass> createState() => RegisterClassState();
@@ -14,13 +17,6 @@ class RegisterClassState extends State<RegisterClass> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.orange,
-        title: Text(
-          "PetStore",
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Form(
           key: formKey,
@@ -103,7 +99,42 @@ class RegisterClassState extends State<RegisterClass> {
               ElevatedButton(
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.orange),
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (formKey.currentState!.validate()) {
+                      try {
+                        var ref = await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passwordController.text);
+                        User? user = ref.user;
+                        if (user != null) {
+                          var db_ref = FirebaseFirestore.instance
+                              .collection("Users")
+                              .add({
+                            "username": nameController.text,
+                            "email": emailController.text,
+                            "password": passwordController.text,
+                            "phone_no": phoneController.text,
+                            "uid": user.uid
+                          });
+                        }
+                        Fluttertoast.showToast(msg: "Registered successfully");
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == "invalid-email") {
+                          Fluttertoast.showToast(msg: "Invaild Email Format");
+                        }
+                        if (e.code == "weak-password") {
+                          Fluttertoast.showToast(
+                              msg: "Enter a strong password");
+                        }
+                        if (e.code == "email-already-in-use") {
+                          Fluttertoast.showToast(msg: "Email already exists");
+                        }
+                      } catch (e) {
+                        Fluttertoast.showToast(msg: "Register Failled");
+                      }
+                    }
+                  },
                   child: Text(
                     "Register",
                     style: TextStyle(color: Colors.white, fontSize: 20),

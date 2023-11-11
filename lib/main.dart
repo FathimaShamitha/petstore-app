@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:petstore/user/userview/registerpage.dart';
+import 'package:petstore/user/loginpage.dart';
+
+import 'admin/adminmainpage.dart';
+
 
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +39,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
         useMaterial3: true,
       ),
-      home: RegisterClass(),
+      home: AdminMainClass(),
     );
   }
 }
