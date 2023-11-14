@@ -2,14 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:petstore/Widgets/appbar.dart';
 
-class UserViewClass extends StatefulWidget {
+class UserViewClass extends StatelessWidget {
   const UserViewClass({Key? key}) : super(key: key);
 
-  @override
-  State<UserViewClass> createState() => _UserViewClassState();
-}
-
-class _UserViewClassState extends State<UserViewClass> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +36,7 @@ class _UserViewClassState extends State<UserViewClass> {
                 });
           } else {
             return Center(
-              child: Text("Somrthing Went Wrong"),
+              child: Text("Something Went Wrong"),
             );
           }
         },

@@ -1,35 +1,20 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:petstore/Widgets/appbar.dart';
+import 'package:provider/provider.dart';
 
-import '../Widgets/simpletextfield.dart';
+import '../../Widgets/simpletextfield.dart';
+import '../controller/imagecontroller.dart';
 
-class AddFoodsClass extends StatefulWidget {
-  const AddFoodsClass({Key? key}) : super(key: key);
-
-  @override
-  State<AddFoodsClass> createState() => _AddFoodsClassState();
-}
-
-class _AddFoodsClassState extends State<AddFoodsClass> {
-  File? image;
-  List<String> FoodCategory = ["Dog Food", "Cat Food"];
-  String selectedCategory = "Dog Food";
-  TextEditingController nameController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
-  TextEditingController quntityController = TextEditingController();
-
-  void addFoodPic() async {
-    var img = await ImagePicker().pickImage(source: ImageSource.gallery);
-    setState(() {
-      image = File(img!.path);
-    });
-  }
+class AddFoodClass extends StatelessWidget {
+  const AddFoodClass({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String selectedCategory = "Dog Food";
+    TextEditingController nameController = TextEditingController();
+    TextEditingController priceController = TextEditingController();
+    TextEditingController quantityController = TextEditingController();
+    final imgObj = Provider.of<ImageUpload>(context);
     double ht = MediaQuery.of(context).size.height;
     double wth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -40,12 +25,12 @@ class _AddFoodsClassState extends State<AddFoodsClass> {
           width: wth,
           child: Column(
             children: [
-              image == null
+              imgObj.image == null
                   ? Container(
                       height: ht / 3,
                       width: wth,
                       child: InkWell(
-                        onTap: addFoodPic,
+                        onTap: () => imgObj.uploadImage(),
                         child: Icon(
                           Icons.add_a_photo_outlined,
                           size: 40,
@@ -57,7 +42,7 @@ class _AddFoodsClassState extends State<AddFoodsClass> {
                       height: ht / 3,
                       width: wth,
                       child: Image(
-                        image: FileImage(image!),
+                        image: FileImage(imgObj.image!),
                       ),
                     ),
               Divider(),
@@ -67,7 +52,7 @@ class _AddFoodsClassState extends State<AddFoodsClass> {
                   hinttxt: 'Name',
                   controller: nameController,
                 )),
-                Padding(
+                /*Padding(
                   padding: const EdgeInsets.only(
                       left: 10, right: 10, top: 10, bottom: 3),
                   child: Text(
@@ -79,7 +64,7 @@ class _AddFoodsClassState extends State<AddFoodsClass> {
                   padding: const EdgeInsets.only(top: 10, left: 10, bottom: 3),
                   child: DropdownButton(
                     value: selectedCategory,
-                    items: FoodCategory.map((String c) {
+                    items: MyConstants().foodType.map((String c) {
                       return DropdownMenuItem(
                         child: Text(c),
                         value: c,
@@ -91,7 +76,7 @@ class _AddFoodsClassState extends State<AddFoodsClass> {
                       });
                     },
                   ),
-                ),
+                ),*/
               ]),
               MyTextFieldClass(
                 hinttxt: 'Price',
@@ -99,7 +84,7 @@ class _AddFoodsClassState extends State<AddFoodsClass> {
               ),
               MyTextFieldClass(
                 hinttxt: 'Quantity',
-                controller: quntityController,
+                controller: quantityController,
               ),
               Padding(
                   padding: const EdgeInsets.only(

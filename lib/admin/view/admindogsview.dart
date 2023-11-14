@@ -1,14 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class AdminDogsViewClass extends StatefulWidget {
+class AdminDogsViewClass extends StatelessWidget {
   const AdminDogsViewClass({Key? key}) : super(key: key);
 
-  @override
-  State<AdminDogsViewClass> createState() => _AdminDogsViewClassState();
-}
-
-class _AdminDogsViewClassState extends State<AdminDogsViewClass> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,14 +40,22 @@ class _AdminDogsViewClassState extends State<AdminDogsViewClass> {
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(dogList[index]['breed'],style: TextStyle(fontSize: 20),),
-                        Text("${dogList[index]['price']}",style: TextStyle(fontSize: 15),),
+                        Text(
+                          dogList[index]['breed'],
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        Text(
+                          "${dogList[index]['price']}",
+                          style: TextStyle(fontSize: 15),
+                        ),
                       ],
                     ),
                     subtitle: Row(
                       children: [
                         Text("${dogList[index]['age']},"),
-                        SizedBox(width: 5,),
+                        SizedBox(
+                          width: 5,
+                        ),
                         Text("${dogList[index]['gender']}"),
                       ],
                     ),

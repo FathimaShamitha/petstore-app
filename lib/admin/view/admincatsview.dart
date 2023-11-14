@@ -1,14 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class AdminCatsViewClass extends StatefulWidget {
+class AdminCatsViewClass extends StatelessWidget {
   const AdminCatsViewClass({Key? key}) : super(key: key);
 
-  @override
-  State<AdminCatsViewClass> createState() => _AdminCatsViewClassState();
-}
-
-class _AdminCatsViewClassState extends State<AdminCatsViewClass> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

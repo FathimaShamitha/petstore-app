@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:petstore/admin/view/adminhome.dart';
 import 'package:petstore/user/register.dart';
 import 'package:petstore/user/userhome.dart';
 import 'package:petstore/utilities/constants.dart';
@@ -79,7 +80,7 @@ class LoginClassState extends State<LoginClass> {
                                 password: passwordController.text);
                         User? user = auth_ref.user;
                         if(user!.uid == MyConstants().adminID){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AdminMainClass()));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AdminHomeClass()));
                         }else{
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeClass()));
                         }
