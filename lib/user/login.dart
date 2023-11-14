@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:petstore/user/registerpage.dart';
-import 'package:petstore/user/userhomepage.dart';
+import 'package:petstore/user/register.dart';
+import 'package:petstore/user/userhome.dart';
 import 'package:petstore/utilities/constants.dart';
 
-import '../admin/adminmainpage.dart';
+import '../admin/adminmain.dart';
 
 class LoginClass extends StatefulWidget {
   @override

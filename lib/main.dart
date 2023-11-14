@@ -1,8 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:petstore/user/loginpage.dart';
+import 'package:petstore/user/login.dart';
 
-import 'admin/adminmainpage.dart';
+import 'admin/addfood.dart';
+import 'admin/addpet.dart';
+import 'admin/adminhome.dart';
+import 'admin/adminmain.dart';
 
 
 void main()async{
@@ -39,7 +42,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
         useMaterial3: true,
       ),
-      home: AdminMainClass(),
+      home: AdminHomeClass(),
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:petstore/admin/petsviewpage.dart';
-import 'package:petstore/admin/usersviewpage.dart';
+import 'package:petstore/admin/petsview.dart';
+import 'package:petstore/admin/usersview.dart';
 
-import 'adminhomepage.dart';
+import 'adminhome.dart';
 
 class AdminMainClass extends StatefulWidget {
   const AdminMainClass({Key? key}) : super(key: key);
