@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 class AddPetsDetails extends ChangeNotifier {
   var db_ref;
 
-  addPetDetails(type, breed, color, age, gender, price, imageurl) async {
+  addPetDetails(type, breed, color, age, gender, price, image) async {
     db_ref = await FirebaseFirestore.instance.collection("Pets").add({
       "type": type,
       "breed": breed,
@@ -12,7 +12,7 @@ class AddPetsDetails extends ChangeNotifier {
       "age": age,
       "gender": gender,
       "price": price,
-      "imageurl": imageurl
+      "imageurl": image
     });
     notifyListeners();
   }

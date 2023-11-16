@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:petstore/Widgets/listtile.dart';
+
+import 'adminpetdetailsview.dart';
 
 class AdminDogsViewClass extends StatelessWidget {
   const AdminDogsViewClass({Key? key}) : super(key: key);
@@ -29,51 +32,15 @@ class AdminDogsViewClass extends StatelessWidget {
             return ListView.builder(
                 itemCount: dogList.length,
                 itemBuilder: (_, index) {
-                  return ListTile(
-                    leading: SizedBox(
-                        height: 70,
-                        width: 70,
-                        child: Image(
-                          image: NetworkImage(dogList[index]['imageurl']),
-                          fit: BoxFit.cover,
-                        )),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          dogList[index]['breed'],
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        Text(
-                          "${dogList[index]['price']}",
-                          style: TextStyle(fontSize: 15),
-                        ),
-                      ],
-                    ),
-                    subtitle: Row(
-                      children: [
-                        Text("${dogList[index]['age']},"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text("${dogList[index]['gender']}"),
-                      ],
-                    ),
-                    trailing: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Icon(
-                          Icons.delete,
-                          color: Colors.orange,
-                          size: 20,
-                        ),
-                        Icon(
-                          Icons.edit,
-                          color: Colors.orange,
-                          size: 20,
-                        ),
-                      ],
-                    ),
+                  return InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminPetDetailsViewClass(docId: snapshot.data!.docs[index].id,)));
+                    },
+                    child: MyListTileClass(
+                        image: dogList[index]['imageurl'],
+                        name: dogList[index]['breed'],
+                        price: dogList[index]['price'],
+                        qty: dogList[index]['age']),
                   );
                 });
           } else {

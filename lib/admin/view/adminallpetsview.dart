@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:petstore/Widgets/listtile.dart';
+
+import 'adminpetdetailsview.dart';
 
 class AdminAllPetsClass extends StatelessWidget {
   const AdminAllPetsClass({Key? key}) : super(key: key);
@@ -27,37 +30,15 @@ class AdminAllPetsClass extends StatelessWidget {
           return ListView.builder(
               itemCount: petList.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  leading: SizedBox(
-                      height: 50,
-                      width: 50,
-                      child: Image(
-                        image: NetworkImage(petList[index]['imageurl']),
-                        fit: BoxFit.cover,
-                      )),
-                  title: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        petList[index]['breed'],
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      Text(
-                        petList[index]['price'],
-                        style: TextStyle(fontSize: 15),
-                      ),
-                    ],
-                  ),
-                  subtitle: Row(
-                    children: [
-                      Text("${petList[index]['age']},"),
-                      Text(petList[index]['gender']),
-                    ],
-                  ),
-                  trailing: Icon(
-                    Icons.delete,
-                    color: Colors.orange,
-                    size: 20,
+                return InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminPetDetailsViewClass(docId: snapshot.data!.docs[index].id,)));
+                  },
+                  child: MyListTileClass(
+                    image: petList[index]['imageurl'],
+                    name: petList[index]['breed'],
+                    price: petList[index]['price'],
+                    qty: petList[index]['age'],
                   ),
                 );
               });

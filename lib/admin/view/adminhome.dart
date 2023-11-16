@@ -6,6 +6,7 @@ import '../../Widgets/card.dart';
 import '../../Widgets/simplelisttile.dart';
 import '../../utilities/constants.dart';
 import 'addfood.dart';
+import 'foodview.dart';
 
 class AdminHomeClass extends StatelessWidget {
   const AdminHomeClass({Key? key}) : super(key: key);
@@ -51,7 +52,7 @@ class AdminHomeClass extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => AdminHomeClass()));
                 },
-                child: MyListTileClass(
+                child: MySimpleListTileClass(
                   myicon: Icons.home,
                   title: 'Home',
                 )),
@@ -60,17 +61,21 @@ class AdminHomeClass extends StatelessWidget {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => PetsViewClass()));
                 },
-                child: MyListTileClass(
+                child: MySimpleListTileClass(
                   myicon: Icons.pets,
                   title: 'Pets',
                 )),
-            MyListTileClass(myicon: Icons.food_bank_sharp, title: 'Foods'),
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> FoodViewClass()));
+              },
+                child: MySimpleListTileClass(myicon: Icons.food_bank_sharp, title: 'Foods')),
             InkWell(
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => UserViewClass()));
                 },
-                child: MyListTileClass(
+                child: MySimpleListTileClass(
                   myicon: Icons.account_circle,
                   title: 'Users',
                 )),

@@ -1,27 +1,33 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:petstore/Widgets/appbar.dart';
 import 'package:provider/provider.dart';
 
-import '../../Widgets/appbar.dart';
 import '../../Widgets/simpletextfield.dart';
+import '../../utilities/constants.dart';
 import '../controller/addpetscontroller.dart';
 import '../controller/imagecontroller.dart';
 
-
-
-class AddPetsClass extends StatelessWidget {
+class AddPetsClass extends StatefulWidget {
   const AddPetsClass({Key? key}) : super(key: key);
 
   @override
+  State<AddPetsClass> createState() => _AddPetsClassState();
+}
+
+class _AddPetsClassState extends State<AddPetsClass> {
+  UploadTask? task;
+  String gender = "";
+  String selectedCategory = "Dog";
+  String selectedColor = "Black";
+  TextEditingController breedController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  TextEditingController genderController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
-    UploadTask? task;
-    String selectedCategory = "Dog";
-    String selectedColor = "Black";
-    TextEditingController breedController = TextEditingController();
-    TextEditingController ageController = TextEditingController();
-    TextEditingController priceController = TextEditingController();
-    TextEditingController genderController = TextEditingController();
     double ht = MediaQuery.of(context).size.height;
     double wth = MediaQuery.of(context).size.width;
     final imgObj = Provider.of<ImageUpload>(context);
@@ -29,9 +35,6 @@ class AddPetsClass extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBarClass(),
       body: SingleChildScrollView(
-          child: Container(
-        height: ht,
-        width: wth,
         child: Column(
           children: [
             imgObj.image == null
@@ -57,7 +60,7 @@ class AddPetsClass extends StatelessWidget {
                     ),
                   ),
             Divider(),
-            /*Row(children: [
+            Row(children: [
               Padding(
                 padding: const EdgeInsets.only(
                   left: 10,
@@ -109,15 +112,46 @@ class AddPetsClass extends StatelessWidget {
                       });
                     }),
               )
-            ]),*/
+            ]),
             MyTextFieldClass(hinttxt: 'Breed', controller: breedController),
             MyTextFieldClass(
               hinttxt: 'Age',
               controller: ageController,
             ),
-            MyTextFieldClass(
-              hinttxt: 'Gender',
-              controller: genderController,
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, top: 10),
+                  child: Text(
+                    "Gender :",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, left: 10),
+                  child: RadioMenuButton(
+                      value: "Male",
+                      groupValue: gender,
+                      onChanged: (value) {
+                        setState(() {
+                          gender = value!;
+                        });
+                      },
+                      child: Text("Male")),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, left: 10),
+                  child: RadioMenuButton(
+                      value: "Female",
+                      groupValue: gender,
+                      onChanged: (value) {
+                        setState(() {
+                          gender = value!;
+                        });
+                      },
+                      child: Text("Female")),
+                )
+              ],
             ),
             MyTextFieldClass(
               hinttxt: 'Price',
@@ -137,10 +171,14 @@ class AddPetsClass extends StatelessWidget {
                       breedController.text,
                       selectedColor,
                       ageController.text,
-                      genderController.text,
+                      gender,
                       priceController.text,
                       imageurl);
                   Fluttertoast.showToast(msg: "Added Successfully");
+                  setState(() {
+                    imgObj.image = null;
+                  });
+                  Navigator.pop(context);
                 },
                 child: Text(
                   "Add",
@@ -148,7 +186,7 @@ class AddPetsClass extends StatelessWidget {
                 ))
           ],
         ),
-      )),
+      ),
     );
   }
 }

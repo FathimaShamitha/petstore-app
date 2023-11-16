@@ -6,8 +6,6 @@ import 'package:petstore/user/register.dart';
 import 'package:petstore/user/userhome.dart';
 import 'package:petstore/utilities/constants.dart';
 
-import '../admin/adminmain.dart';
-
 class LoginClass extends StatefulWidget {
   @override
   State<LoginClass> createState() => LoginClassState();
@@ -79,10 +77,16 @@ class LoginClassState extends State<LoginClass> {
                                 email: emailController.text,
                                 password: passwordController.text);
                         User? user = auth_ref.user;
-                        if(user!.uid == MyConstants().adminID){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AdminHomeClass()));
-                        }else{
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeClass()));
+                        if (user!.uid == MyConstants().adminID) {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AdminHomeClass()));
+                        } else {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomeClass()));
                         }
                         Fluttertoast.showToast(msg: "Logged In");
                       } on FirebaseAuthException catch (e) {
