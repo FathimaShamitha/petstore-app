@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petstore/Widgets/listtile.dart';
 
+import '../../Widgets/alertdialogue.dart';
 import 'adminpetdetailsview.dart';
 
 class AdminCatsViewClass extends StatelessWidget {
@@ -34,14 +36,42 @@ class AdminCatsViewClass extends StatelessWidget {
                 itemCount: catList.length,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminPetDetailsViewClass(docId: snapshot.data!.docs[index].id,)));
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AdminPetDetailsViewClass(
+                                    docId: snapshot.data!.docs[index].id,
+                                  )));
                     },
                     child: MyListTileClass(
-                        image: catList[index]['imageurl'],
-                        name: catList[index]['breed'],
-                        price: catList[index]['price'],
-                        qty: catList[index]['age']),
+                      image: catList[index]['imageurl'],
+                      name: catList[index]['breed'],
+                      price: catList[index]['price'],
+                      qty: catList[index]['age'],
+                      func: () {
+                        var alertDialog = MyAlertDialogueClass(
+                            title: "Are you sure you want to Delete",
+                            content: "This action will permanently delete data",
+                            yes: "Delete",
+                            no: "Cancel",
+                            onYesPressed: () async {
+                              await FirebaseFirestore.instance
+                                  .collection("Pets")
+                                  .doc(snapshot.data.docs[index].id)
+                                  .delete();
+                              Navigator.pop(context);
+                              Fluttertoast.showToast(msg: "Deleted");
+                            },
+                            onNoPressed: () {
+                              Navigator.pop(context);
+                              return;
+                            });
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => alertDialog);
+                      },
+                    ),
                   );
                 });
           } else {

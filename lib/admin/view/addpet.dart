@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../Widgets/simpletextfield.dart';
 import '../../utilities/constants.dart';
-import '../controller/addpetscontroller.dart';
+import '../controller/adddetailscontroller.dart';
 import '../controller/imagecontroller.dart';
 
 class AddPetsClass extends StatefulWidget {
@@ -31,7 +31,7 @@ class _AddPetsClassState extends State<AddPetsClass> {
     double ht = MediaQuery.of(context).size.height;
     double wth = MediaQuery.of(context).size.width;
     final imgObj = Provider.of<ImageUpload>(context);
-    final petDetailsObj = Provider.of<AddPetsDetails>(context);
+    final petDetailsObj = Provider.of<AddDetails>(context);
     return Scaffold(
       appBar: MyAppBarClass(),
       body: SingleChildScrollView(

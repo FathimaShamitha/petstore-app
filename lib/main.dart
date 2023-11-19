@@ -1,9 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:petstore/user/view/homepetstream.dart';
+import 'package:petstore/user/view/userallpetsview.dart';
+import 'package:petstore/user/view/userhome.dart';
+import 'package:petstore/user/view/userpetview.dart';
 import 'package:provider/provider.dart';
 
-import 'admin/controller/addfoodcontroller.dart';
-import 'admin/controller/addpetscontroller.dart';
+import 'admin/controller/adddetailscontroller.dart';
 import 'admin/controller/imagecontroller.dart';
 import 'admin/view/adminhome.dart';
 
@@ -22,8 +25,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ImageUpload()),
-        ChangeNotifierProvider(create: (context) => AddPetsDetails()),
-        ChangeNotifierProvider(create: (context) => AddFoodDetailsClass()),
+        ChangeNotifierProvider(create: (context) => AddDetails()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -47,7 +49,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
           useMaterial3: true,
         ),
-        home: AdminHomeClass(),
+        home: UserHomeClass(),
       ),
     );
   }

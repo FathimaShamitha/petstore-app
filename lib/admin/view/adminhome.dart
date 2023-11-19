@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:petstore/Widgets/homeappbar.dart';
 import 'package:petstore/admin/view/addpet.dart';
 import 'package:petstore/admin/view/petsview.dart';
 import 'package:petstore/admin/view/usersview.dart';
 import '../../Widgets/card.dart';
 import '../../Widgets/simplelisttile.dart';
+import '../../home/login.dart';
 import '../../utilities/constants.dart';
 import 'addfood.dart';
 import 'foodview.dart';
@@ -16,22 +20,13 @@ class AdminHomeClass extends StatelessWidget {
     double ht = MediaQuery.of(context).size.height;
     double wth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.orange,
-        title: Text(
-          MyConstants().appTitle,
-          style: TextStyle(color: Colors.white),
-        ),
-        actions: [
-          Icon(
-            Icons.logout,
-            color: Colors.white,
-            size: 20,
-          ),
-          SizedBox(
-            width: 20,
-          )
-        ],
+      appBar: HomeAppBarClass(
+        func: () async {
+          await FirebaseAuth.instance.signOut();
+          Fluttertoast.showToast(msg: "Logged Out");
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => LoginClass()));
+        },
       ),
       drawer: Drawer(
         child: ListView(
@@ -66,10 +61,12 @@ class AdminHomeClass extends StatelessWidget {
                   title: 'Pets',
                 )),
             InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> FoodViewClass()));
-              },
-                child: MySimpleListTileClass(myicon: Icons.food_bank_sharp, title: 'Foods')),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => FoodViewClass()));
+                },
+                child: MySimpleListTileClass(
+                    myicon: Icons.food_bank_sharp, title: 'Foods')),
             InkWell(
                 onTap: () {
                   Navigator.push(context,

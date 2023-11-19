@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../Widgets/simpletextfield.dart';
 import '../../utilities/constants.dart';
-import '../controller/addfoodcontroller.dart';
+import '../controller/adddetailscontroller.dart';
 import '../controller/imagecontroller.dart';
 
 class AddFoodClass extends StatefulWidget {
@@ -29,7 +29,7 @@ class _AddFoodClassState extends State<AddFoodClass> {
     double ht = MediaQuery.of(context).size.height;
     double wth = MediaQuery.of(context).size.width;
     final imgObj = Provider.of<ImageUpload>(context);
-    final foodDetailsObj = Provider.of<AddFoodDetailsClass>(context);
+    final foodDetailsObj = Provider.of<AddDetails>(context);
     return Scaffold(
       appBar: MyAppBarClass(),
       body: SingleChildScrollView(

@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petstore/admin/view/adminhome.dart';
-import 'package:petstore/user/register.dart';
-import 'package:petstore/user/userhome.dart';
+import 'package:petstore/user/view/register.dart';
+import 'package:petstore/user/view/userhome.dart';
 import 'package:petstore/utilities/constants.dart';
 
 class LoginClass extends StatefulWidget {
@@ -86,7 +86,7 @@ class LoginClassState extends State<LoginClass> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeClass()));
+                                  builder: (context) => UserHomeClass()));
                         }
                         Fluttertoast.showToast(msg: "Logged In");
                       } on FirebaseAuthException catch (e) {

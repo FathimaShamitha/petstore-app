@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:petstore/Widgets/alertdialogue.dart';
 
 import '../../Widgets/listtile.dart';
+import 'adminfooddetailsview.dart';
 
 class AdminCatFoodViewClass extends StatelessWidget {
   const AdminCatFoodViewClass({Key? key}) : super(key: key);
@@ -32,11 +35,44 @@ class AdminCatFoodViewClass extends StatelessWidget {
             return ListView.builder(
                 itemCount: catList.length,
                 itemBuilder: (context, index) {
-                  return MyListTileClass(
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AdminFoodDetailsViewClass(
+                                    docId: snapshot.data!.docs[index].id,
+                                  )));
+                    },
+                    child: MyListTileClass(
                       image: catList[index]['image'],
                       name: catList[index]['name'],
                       price: catList[index]['price'],
-                      qty: catList[index]['quantity']);
+                      qty: catList[index]['quantity'],
+                      func: () {
+                        var alertDialog = MyAlertDialogueClass(
+                            title: "Are you sure you want to Delete",
+                            content: "This action will permanently delete data",
+                            yes: "Delete",
+                            no: "Cancel",
+                            onYesPressed: () async {
+                              await FirebaseFirestore.instance
+                                  .collection("Foods")
+                                  .doc(snapshot.data.docs[index].id)
+                                  .delete();
+                              Navigator.pop(context);
+                              Fluttertoast.showToast(msg: "Deleted");
+                            },
+                            onNoPressed: () {
+                              Navigator.pop(context);
+                              return;
+                            });
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => alertDialog);
+                      },
+                    ),
+                  );
                 });
           } else {
             return Center(

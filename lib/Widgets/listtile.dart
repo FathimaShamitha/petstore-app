@@ -7,11 +7,13 @@ class MyListTileClass extends StatelessWidget {
     required this.name,
     required this.price,
     required this.qty,
+    required this.func,
   }) : super(key: key);
   final String image;
   final String name;
   final String price;
   final String qty;
+  final Function func;
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +36,16 @@ class MyListTileClass extends StatelessWidget {
           ),
         ],
       ),
-      subtitle: Row(
-        children: [
-          Text(qty),
-        ],
-      ),
+      subtitle: Text(qty),
+      trailing: InkWell(
+          onTap: () {
+            func();
+          },
+          child: Icon(
+            Icons.delete,
+            color: Colors.orange,
+            size: 20,
+          )),
     );
   }
 }

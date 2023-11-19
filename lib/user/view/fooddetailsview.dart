@@ -1,17 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:petstore/Widgets/appbar.dart';
 
-class AdminPetDetailsViewClass extends StatefulWidget {
-  const AdminPetDetailsViewClass({Key? key, required this.docId})
-      : super(key: key);
+import '../../Widgets/appbar.dart';
+
+class UserFoodDetailsClass extends StatefulWidget {
+  const UserFoodDetailsClass({Key? key, required this.docId}) : super(key: key);
   final docId;
 
   @override
-  State<AdminPetDetailsViewClass> createState() => _AdminPetDetailsViewState();
+  State<UserFoodDetailsClass> createState() => _UserFoodDetailsClassState();
 }
 
-class _AdminPetDetailsViewState extends State<AdminPetDetailsViewClass> {
+class _UserFoodDetailsClassState extends State<UserFoodDetailsClass> {
   @override
   Widget build(BuildContext context) {
     double ht = MediaQuery.of(context).size.height;
@@ -20,7 +20,7 @@ class _AdminPetDetailsViewState extends State<AdminPetDetailsViewClass> {
       appBar: MyAppBarClass(),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
-            .collection("Pets")
+            .collection("Foods")
             .doc(widget.docId)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -41,7 +41,7 @@ class _AdminPetDetailsViewState extends State<AdminPetDetailsViewClass> {
                   height: ht / 3,
                   width: wth,
                   child: Image(
-                    image: NetworkImage(snapshot.data['imageurl']),
+                    image: NetworkImage(snapshot.data['image']),
                   ),
                 ),
                 Divider(),
@@ -50,38 +50,35 @@ class _AdminPetDetailsViewState extends State<AdminPetDetailsViewClass> {
                     padding: const EdgeInsets.only(
                         left: 10, top: 10, bottom: 10, right: 10),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Breed : ${snapshot.data['breed']}",
+                          " ${snapshot.data['name']}",
                           style: TextStyle(fontSize: 20),
                         ),
-                        Divider(),
                         Text(
-                          "Age : ${snapshot.data['age']}",
+                          "${snapshot.data['category']}",
                           style: TextStyle(fontSize: 18),
                         ),
-                        Divider(),
                         Text(
-                          "Fur : ${snapshot.data['fur']}",
+                          "${snapshot.data['quantity']}",
                           style: TextStyle(fontSize: 18),
                         ),
-                        Divider(),
                         Text(
-                          "Gender : ${snapshot.data['gender']}",
+                          " ${snapshot.data['price']}",
                           style: TextStyle(fontSize: 18),
                         ),
-                        Divider(),
-                        Text(
-                          "Price : ${snapshot.data['price']}",
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Divider(),
                       ],
                     ),
                   ),
                 ),
-                ElevatedButton(onPressed: () {}, child: Text("Edit"))
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange),
+                    onPressed: () {},
+                    child: Text(
+                      "Add To Cart",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ))
               ],
             );
           } else {

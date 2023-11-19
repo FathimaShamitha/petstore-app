@@ -2,16 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:petstore/Widgets/appbar.dart';
 
-class AdminPetDetailsViewClass extends StatefulWidget {
-  const AdminPetDetailsViewClass({Key? key, required this.docId})
-      : super(key: key);
+class UserPetDetailsClass extends StatefulWidget {
+  const UserPetDetailsClass({Key? key, required this.docId}) : super(key: key);
   final docId;
 
   @override
-  State<AdminPetDetailsViewClass> createState() => _AdminPetDetailsViewState();
+  State<UserPetDetailsClass> createState() => _UserPetDetailsClassState();
 }
 
-class _AdminPetDetailsViewState extends State<AdminPetDetailsViewClass> {
+class _UserPetDetailsClassState extends State<UserPetDetailsClass> {
   @override
   Widget build(BuildContext context) {
     double ht = MediaQuery.of(context).size.height;
@@ -50,38 +49,30 @@ class _AdminPetDetailsViewState extends State<AdminPetDetailsViewClass> {
                     padding: const EdgeInsets.only(
                         left: 10, top: 10, bottom: 10, right: 10),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Breed : ${snapshot.data['breed']}",
+                          " ${snapshot.data['breed']}",
                           style: TextStyle(fontSize: 20),
                         ),
-                        Divider(),
                         Text(
-                          "Age : ${snapshot.data['age']}",
+                          "${snapshot.data['fur']}",
                           style: TextStyle(fontSize: 18),
                         ),
-                        Divider(),
                         Text(
-                          "Fur : ${snapshot.data['fur']}",
+                          "${snapshot.data['age']}, ${snapshot.data['gender']}",
                           style: TextStyle(fontSize: 18),
                         ),
-                        Divider(),
                         Text(
-                          "Gender : ${snapshot.data['gender']}",
+                          " ${snapshot.data['price']}",
                           style: TextStyle(fontSize: 18),
                         ),
-                        Divider(),
-                        Text(
-                          "Price : ${snapshot.data['price']}",
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Divider(),
                       ],
                     ),
                   ),
                 ),
-                ElevatedButton(onPressed: () {}, child: Text("Edit"))
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+                    onPressed: () {}, child: Text("Add To Cart",style: TextStyle(color: Colors.white,fontSize: 18),))
               ],
             );
           } else {
