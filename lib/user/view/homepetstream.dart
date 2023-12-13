@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:petstore/Widgets/customWidget1.dart';
+import 'package:petstore/Widgets/customwidget1.dart';
 
 class HomePetStreamClass extends StatelessWidget {
   const HomePetStreamClass({Key? key}) : super(key: key);
@@ -13,14 +12,14 @@ class HomePetStreamClass extends StatelessWidget {
       stream: FirebaseFirestore.instance.collection("Pets").snapshots(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(
               color: Colors.orange,
             ),
           );
         }
         if (snapshot.hasError) {
-          return Center(
+          return const Center(
             child: Text("Error"),
           );
         }
@@ -40,7 +39,7 @@ class HomePetStreamClass extends StatelessWidget {
                 );
               });
         } else {
-          return Center(
+          return const Center(
             child: Text("Something Went Wrong"),
           );
         }

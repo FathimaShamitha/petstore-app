@@ -27,11 +27,11 @@ class MyColumnClass extends StatelessWidget {
           ),
           Text(
             name,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           Text(
             price,
-            style: TextStyle(fontSize: 15),
+            style: const TextStyle(fontSize: 15),
           )
         ],
       ),

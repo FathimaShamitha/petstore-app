@@ -41,7 +41,7 @@ class MyListTileClass extends StatelessWidget {
           onTap: () {
             func();
           },
-          child: Icon(
+          child: const Icon(
             Icons.delete,
             color: Colors.orange,
             size: 20,

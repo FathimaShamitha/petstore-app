@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../../Widgets/customWidget1.dart';
+import '../../Widgets/customwidget1.dart';
 
 class HomeFoodStreamClass extends StatelessWidget {
   const HomeFoodStreamClass({Key? key}) : super(key: key);
@@ -13,14 +13,14 @@ class HomeFoodStreamClass extends StatelessWidget {
         stream: FirebaseFirestore.instance.collection("Foods").snapshots(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 color: Colors.orange,
               ),
             );
           }
           if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text("Error"),
             );
           }
@@ -40,7 +40,7 @@ class HomeFoodStreamClass extends StatelessWidget {
                   );
                 });
           } else {
-            return Center(
+            return const Center(
               child: Text("Something Went Wrong"),
             );
           }

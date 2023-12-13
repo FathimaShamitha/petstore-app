@@ -2,6 +2,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petstore/Widgets/appbar.dart';
+import 'package:petstore/Widgets/carouselslider.dart';
 import 'package:provider/provider.dart';
 
 import '../../Widgets/simpletextfield.dart';
@@ -26,58 +27,39 @@ class _AddFoodClassState extends State<AddFoodClass> {
 
   @override
   Widget build(BuildContext context) {
-    double ht = MediaQuery.of(context).size.height;
-    double wth = MediaQuery.of(context).size.width;
-    final imgObj = Provider.of<ImageUpload>(context);
     final foodDetailsObj = Provider.of<AddDetails>(context);
+    final imageObj = Provider.of<ImageUpload>(context);
     return Scaffold(
-      appBar: MyAppBarClass(),
+      appBar: const MyAppBarClass(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            imgObj.image == null
-                ? Container(
-                    height: ht / 3,
-                    width: wth,
-                    child: InkWell(
-                      onTap: () => imgObj.uploadImage(),
-                      child: Icon(
-                        Icons.add_a_photo_outlined,
-                        size: 40,
-                        color: Colors.orange,
-                      ),
-                    ),
-                  )
-                : Container(
-                    height: ht / 3,
-                    width: wth,
-                    child: Image(
-                      image: FileImage(imgObj.image!),
-                    ),
-                  ),
-            Divider(),
+            const MyCarouselSlider(),
+            const Divider(),
+            MyTextFieldClass(hinttxt: 'Name', controller: nameController),
             Row(children: [
               Expanded(
                   child: MyTextFieldClass(
-                hinttxt: 'Name',
-                controller: nameController,
+                hinttxt: 'Category',
+                controller: categoryController,
               )),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 10, right: 10, top: 10, bottom: 3),
+              const Padding(
+                padding:
+                    EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 3),
                 child: Text(
                   "Type :",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 10, left: 10, bottom: 3),
+                padding: const EdgeInsets.only(
+                    top: 10, left: 10, right: 10, bottom: 3),
                 child: DropdownButton(
                   value: selectedType,
                   items: MyConstants().foodType.map((String c) {
                     return DropdownMenuItem(
-                      child: Text(c),
                       value: c,
+                      child: Text(c),
                     );
                   }).toList(),
                   onChanged: (value) {
@@ -88,8 +70,6 @@ class _AddFoodClassState extends State<AddFoodClass> {
                 ),
               ),
             ]),
-            MyTextFieldClass(
-                hinttxt: 'Category', controller: categoryController),
             MyTextFieldClass(
               hinttxt: 'Price',
               controller: priceController,
@@ -105,26 +85,21 @@ class _AddFoodClassState extends State<AddFoodClass> {
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.orange),
                   onPressed: () async {
-                    var img_ref = await FirebaseStorage.instance
-                        .ref()
-                        .child("MyFoodImages/${imgObj.image!.path}");
-                    task = img_ref.putFile(imgObj.image!);
-                    final snap = await task!.whenComplete(() {});
-                    var imageurl = await snap.ref.getDownloadURL();
+                    imageObj.uploadImage();
                     foodDetailsObj.addFoodDetails(
                         nameController.text,
                         selectedType,
                         categoryController.text,
                         priceController.text,
                         quantityController.text,
-                        imageurl);
+                        imageObj.imageUrl.toList());
                     setState(() {
-                      imgObj.image = null;
+                      imageObj.image.clear();
                     });
                     Fluttertoast.showToast(msg: "Added Successfully");
                     Navigator.pop(context);
                   },
-                  child: Text(
+                  child: const Text(
                     "Add",
                     style: TextStyle(color: Colors.white),
                   ),

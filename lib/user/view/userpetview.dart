@@ -19,10 +19,10 @@ class UserPetsViewClass extends StatelessWidget {
             backgroundColor: Colors.orange,
             title: Text(
               MyConstants().appTitle,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
-            bottom: TabBar(
-              tabs: [
+            bottom: const TabBar(
+              tabs:  [
                 MyTabClass(title: 'All'),
                 MyTabClass(title: 'Dogs'),
                 MyTabClass(title: 'Cats'),

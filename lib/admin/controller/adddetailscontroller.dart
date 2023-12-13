@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 class AddDetails extends ChangeNotifier {
-  var db_ref;
 
-  addPetDetails(type, breed, color, age, gender, price, image) async {
-    db_ref = await FirebaseFirestore.instance.collection("Pets").add({
+
+  addPetDetails(type, breed, color, age, gender, price,  image) async {
+    var dbRef = await FirebaseFirestore.instance.collection("Pets").add({
       "type": type,
       "breed": breed,
       "fur": color,
@@ -17,8 +17,8 @@ class AddDetails extends ChangeNotifier {
     notifyListeners();
   }
 
-  addFoodDetails(name, type, category, price, quantity, image) async {
-    db_ref = await FirebaseFirestore.instance.collection("Foods").add({
+  addFoodDetails(name, type, category, price, quantity, List image) async {
+    var dbRef = await FirebaseFirestore.instance.collection("Foods").add({
       "name": name,
       "type": type,
       "category": category,
@@ -28,4 +28,21 @@ class AddDetails extends ChangeNotifier {
     });
     notifyListeners();
   }
+
+  deletePetDetails(String id) async{
+    await FirebaseFirestore.instance
+        .collection("Pets")
+        .doc(id)
+        .delete();
+    notifyListeners();
+  }
+
+  deleteFoodDetails(String id) async{
+    await FirebaseFirestore.instance
+        .collection("Foods")
+        .doc(id)
+        .delete();
+    notifyListeners();
+  }
+
 }

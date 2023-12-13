@@ -19,9 +19,9 @@ class UserFoodViewClass extends StatelessWidget {
           backgroundColor: Colors.orange,
           title: Text(
             MyConstants().appTitle,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
-          bottom: TabBar(
+          bottom: const TabBar(
             tabs: [
               MyTabClass(title: 'All'),
               MyTabClass(title: 'Dog Foods'),
@@ -29,7 +29,7 @@ class UserFoodViewClass extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             UserAllFoodsClass(),
             UserDogFoodClass(),

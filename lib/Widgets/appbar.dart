@@ -10,12 +10,12 @@ class MyAppBarClass extends StatelessWidget implements PreferredSizeWidget{
       backgroundColor: Colors.orange,
       title: Text(
         MyConstants().appTitle,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
     );
   }
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => Size.fromHeight(70);
+  Size get preferredSize => const Size.fromHeight(70);
 }

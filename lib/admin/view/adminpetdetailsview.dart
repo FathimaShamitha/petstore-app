@@ -17,7 +17,7 @@ class _AdminPetDetailsViewState extends State<AdminPetDetailsViewClass> {
     double ht = MediaQuery.of(context).size.height;
     double wth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: MyAppBarClass(),
+      appBar: const MyAppBarClass(),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("Pets")
@@ -25,14 +25,14 @@ class _AdminPetDetailsViewState extends State<AdminPetDetailsViewClass> {
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 color: Colors.orange,
               ),
             );
           }
           if (snapshot.hasError) {
-            return Center(child: Text("Error!!!!"));
+            return const Center(child:  Text("Error!!!!"));
           }
           if (snapshot.hasData) {
             return Column(
@@ -44,7 +44,7 @@ class _AdminPetDetailsViewState extends State<AdminPetDetailsViewClass> {
                     image: NetworkImage(snapshot.data['imageurl']),
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.only(
@@ -54,38 +54,37 @@ class _AdminPetDetailsViewState extends State<AdminPetDetailsViewClass> {
                       children: [
                         Text(
                           "Breed : ${snapshot.data['breed']}",
-                          style: TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                         ),
-                        Divider(),
+                        const Divider(),
                         Text(
                           "Age : ${snapshot.data['age']}",
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
-                        Divider(),
+                        const Divider(),
                         Text(
                           "Fur : ${snapshot.data['fur']}",
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
-                        Divider(),
+                        const Divider(),
                         Text(
                           "Gender : ${snapshot.data['gender']}",
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
-                        Divider(),
+                        const Divider(),
                         Text(
                           "Price : ${snapshot.data['price']}",
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
-                        Divider(),
+                        const Divider(),
                       ],
                     ),
                   ),
                 ),
-                ElevatedButton(onPressed: () {}, child: Text("Edit"))
               ],
             );
           } else {
-            return Center(
+            return const Center(
               child: Text("Something went wrong"),
             );
           }

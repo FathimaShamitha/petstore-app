@@ -8,19 +8,19 @@ class UserViewClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBarClass(),
+      appBar: const MyAppBarClass(),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection("Users").snapshots(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 color: Colors.orange,
               ),
             );
           }
           if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text("Error"),
             );
           }
@@ -30,12 +30,12 @@ class UserViewClass extends StatelessWidget {
                 itemCount: userList.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    leading: Icon(Icons.account_circle),
+                    leading: const Icon(Icons.account_circle),
                     title: Text(userList[index]['username']),
                   );
                 });
           } else {
-            return Center(
+            return const Center(
               child: Text("Something Went Wrong"),
             );
           }

@@ -22,12 +22,12 @@ class MyCardClass extends StatelessWidget {
           children: [
             Text(
               txt,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.orange,
                   fontSize: 25,
                   fontWeight: FontWeight.bold),
             ),
-            Icon(
+            const Icon(
               Icons.add,
               color: Colors.orange,
               size: 40,

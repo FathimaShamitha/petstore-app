@@ -8,7 +8,6 @@ import 'package:petstore/admin/view/usersview.dart';
 import '../../Widgets/card.dart';
 import '../../Widgets/simplelisttile.dart';
 import '../../home/login.dart';
-import '../../utilities/constants.dart';
 import 'addfood.dart';
 import 'foodview.dart';
 
@@ -31,7 +30,7 @@ class AdminHomeClass extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           children: [
-            DrawerHeader(
+            const DrawerHeader(
                 child: CircleAvatar(
               radius: 10,
               backgroundColor: Colors.orange,
@@ -45,34 +44,34 @@ class AdminHomeClass extends StatelessWidget {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AdminHomeClass()));
+                          builder: (context) => const AdminHomeClass()));
                 },
-                child: MySimpleListTileClass(
+                child: const MySimpleListTileClass(
                   myicon: Icons.home,
                   title: 'Home',
                 )),
             InkWell(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PetsViewClass()));
+                      MaterialPageRoute(builder: (context) => const PetsViewClass()));
                 },
-                child: MySimpleListTileClass(
+                child: const MySimpleListTileClass(
                   myicon: Icons.pets,
                   title: 'Pets',
                 )),
             InkWell(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => FoodViewClass()));
+                      MaterialPageRoute(builder: (context) => const FoodViewClass()));
                 },
-                child: MySimpleListTileClass(
+                child: const MySimpleListTileClass(
                     myicon: Icons.food_bank_sharp, title: 'Foods')),
             InkWell(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => UserViewClass()));
+                      MaterialPageRoute(builder: (context) => const UserViewClass()));
                 },
-                child: MySimpleListTileClass(
+                child: const MySimpleListTileClass(
                   myicon: Icons.account_circle,
                   title: 'Users',
                 )),
@@ -88,7 +87,7 @@ class AdminHomeClass extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AddPetsClass()));
+                      MaterialPageRoute(builder: (context) => const AddPetsClass()));
                 },
                 child: MyCardClass(
                   height: ht / 4,
@@ -99,7 +98,7 @@ class AdminHomeClass extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AddFoodClass()));
+                      MaterialPageRoute(builder: (context) => const AddFoodClass()));
                 },
                 child: MyCardClass(
                   height: ht / 4,

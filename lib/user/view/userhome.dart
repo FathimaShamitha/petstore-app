@@ -28,7 +28,7 @@ class UserHomeClass extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           children: [
-            DrawerHeader(
+            const DrawerHeader(
                 child: CircleAvatar(
               radius: 10,
               backgroundColor: Colors.orange,
@@ -40,17 +40,17 @@ class UserHomeClass extends StatelessWidget {
             InkWell(
                 onTap: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => UserHomeClass()));
+                      MaterialPageRoute(builder: (context) => const UserHomeClass()));
                 },
                 child:
-                    MySimpleListTileClass(myicon: Icons.home, title: 'Home')),
-            MySimpleListTileClass(
+                    const MySimpleListTileClass(myicon: Icons.home, title: 'Home')),
+            const MySimpleListTileClass(
                 myicon: Icons.account_circle, title: 'Profile'),
-            MySimpleListTileClass(myicon: Icons.shopping_cart, title: 'Cart'),
-            MySimpleListTileClass(
+            const MySimpleListTileClass(myicon: Icons.shopping_cart, title: 'Cart'),
+            const MySimpleListTileClass(
                 myicon: Icons.shopping_bag, title: 'Purchases'),
-            MySimpleListTileClass(myicon: Icons.settings, title: 'Settings'),
-            MySimpleListTileClass(
+            const MySimpleListTileClass(myicon: Icons.settings, title: 'Settings'),
+            const MySimpleListTileClass(
                 myicon: Icons.info_outline_rounded, title: 'About'),
           ],
         ),
@@ -59,8 +59,8 @@ class UserHomeClass extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            MyCarouselClass(),
-            Padding(
+            const MyCarouselClass(),
+            const Padding(
               padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
               child: Text(
                 "Pets",
@@ -73,7 +73,7 @@ class UserHomeClass extends StatelessWidget {
             SizedBox(
                 height: MediaQuery.of(context).size.height / 3,
                 width: MediaQuery.of(context).size.width,
-                child: HomePetStreamClass()),
+                child: const HomePetStreamClass()),
             Padding(
               padding: const EdgeInsets.only(left: 250),
               child: TextButton(
@@ -81,14 +81,14 @@ class UserHomeClass extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => UserPetsViewClass()));
+                            builder: (context) => const UserPetsViewClass()));
                   },
-                  child: Text(
+                  child: const Text(
                     "View All->",
                     style: TextStyle(color: Colors.blue),
                   )),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
               child: Text(
                 "Foods",
@@ -101,7 +101,7 @@ class UserHomeClass extends StatelessWidget {
             SizedBox(
                 height: MediaQuery.of(context).size.height / 3,
                 width: MediaQuery.of(context).size.width,
-                child: HomeFoodStreamClass()),
+                child: const HomeFoodStreamClass()),
             Padding(
               padding: const EdgeInsets.only(left: 250),
               child: TextButton(
@@ -109,9 +109,9 @@ class UserHomeClass extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => UserFoodViewClass()));
+                            builder: (context) => const UserFoodViewClass()));
                   },
-                  child: Text(
+                  child: const Text(
                     "View All->",
                     style: TextStyle(color: Colors.blue),
                   )),

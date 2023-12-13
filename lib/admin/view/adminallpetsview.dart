@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petstore/Widgets/listtile.dart';
+import 'package:provider/provider.dart';
 
 import '../../Widgets/alertdialogue.dart';
+import '../controller/adddetailscontroller.dart';
 import 'adminpetdetailsview.dart';
 
 class AdminAllPetsClass extends StatelessWidget {
@@ -16,14 +18,14 @@ class AdminAllPetsClass extends StatelessWidget {
       stream: FirebaseFirestore.instance.collection("Pets").snapshots(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(
               color: Colors.orange,
             ),
           );
         }
         if (snapshot.hasError) {
-          return Center(
+          return const Center(
             child: Text("Error!!!!"),
           );
         }
@@ -52,11 +54,9 @@ class AdminAllPetsClass extends StatelessWidget {
                           content: "This action will permanently delete data",
                           yes: "Delete",
                           no: "Cancel",
-                          onYesPressed: () async {
-                            await FirebaseFirestore.instance
-                                .collection("Pets")
-                                .doc(snapshot.data.docs[index].id)
-                                .delete();
+                          onYesPressed: () {
+                            Provider.of<AddDetails>(context, listen: false)
+                                .deletePetDetails(snapshot.data.docs[index].id);
                             Navigator.pop(context);
                             Fluttertoast.showToast(msg: "Deleted");
                           },
@@ -72,7 +72,7 @@ class AdminAllPetsClass extends StatelessWidget {
                 );
               });
         } else {
-          return Center(
+          return const Center(
             child: Text("Something Went Wrong"),
           );
         }

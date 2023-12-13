@@ -12,20 +12,20 @@ class HomeAppBarClass extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.orange,
       title: Text(
         MyConstants().appTitle,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       actions: [
         InkWell(
           onTap: () {
             func();
           },
-          child: Icon(
+          child: const Icon(
             Icons.logout,
             color: Colors.white,
             size: 20,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 20,
         )
       ],
@@ -34,5 +34,5 @@ class HomeAppBarClass extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => Size.fromHeight(70);
+  Size get preferredSize => const Size.fromHeight(70);
 }

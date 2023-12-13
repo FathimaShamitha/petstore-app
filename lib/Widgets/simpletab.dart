@@ -9,7 +9,7 @@ class MyTabClass extends StatelessWidget {
     return Tab(
       child: Text(
         title,
-        style: TextStyle(color: Colors.white, fontSize: 18),
+        style: const TextStyle(color: Colors.white, fontSize: 18),
       ),
     );
   }

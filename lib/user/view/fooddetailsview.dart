@@ -5,7 +5,7 @@ import '../../Widgets/appbar.dart';
 
 class UserFoodDetailsClass extends StatefulWidget {
   const UserFoodDetailsClass({Key? key, required this.docId}) : super(key: key);
-  final docId;
+  final String docId;
 
   @override
   State<UserFoodDetailsClass> createState() => _UserFoodDetailsClassState();
@@ -17,7 +17,7 @@ class _UserFoodDetailsClassState extends State<UserFoodDetailsClass> {
     double ht = MediaQuery.of(context).size.height;
     double wth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: MyAppBarClass(),
+      appBar: const MyAppBarClass(),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("Foods")
@@ -25,14 +25,14 @@ class _UserFoodDetailsClassState extends State<UserFoodDetailsClass> {
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 color: Colors.orange,
               ),
             );
           }
           if (snapshot.hasError) {
-            return Center(child: Text("Error!!!!"));
+            return const Center(child: Text("Error!!!!"));
           }
           if (snapshot.hasData) {
             return Column(
@@ -44,7 +44,7 @@ class _UserFoodDetailsClassState extends State<UserFoodDetailsClass> {
                     image: NetworkImage(snapshot.data['image']),
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.only(
@@ -53,19 +53,19 @@ class _UserFoodDetailsClassState extends State<UserFoodDetailsClass> {
                       children: [
                         Text(
                           " ${snapshot.data['name']}",
-                          style: TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                         ),
                         Text(
                           "${snapshot.data['category']}",
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
                         Text(
                           "${snapshot.data['quantity']}",
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
                         Text(
                           " ${snapshot.data['price']}",
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ],
                     ),
@@ -75,14 +75,14 @@ class _UserFoodDetailsClassState extends State<UserFoodDetailsClass> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange),
                     onPressed: () {},
-                    child: Text(
+                    child: const Text(
                       "Add To Cart",
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ))
               ],
             );
           } else {
-            return Center(
+            return const Center(
               child: Text("Something went wrong"),
             );
           }

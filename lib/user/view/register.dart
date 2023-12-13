@@ -22,8 +22,8 @@ class RegisterClassState extends State<RegisterClass> {
           key: formKey,
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 50, bottom: 20),
+              const Padding(
+                padding:  EdgeInsets.only(top: 50, bottom: 20),
                 child: Text(
                   "Register",
                   style: TextStyle(
@@ -108,7 +108,7 @@ class RegisterClassState extends State<RegisterClass> {
                                 password: passwordController.text);
                         User? user = ref.user;
                         if (user != null) {
-                          var db_ref = FirebaseFirestore.instance
+                          var dbRef = FirebaseFirestore.instance
                               .collection("Users")
                               .add({
                             "username": nameController.text,
@@ -135,7 +135,7 @@ class RegisterClassState extends State<RegisterClass> {
                       }
                     }
                   },
-                  child: Text(
+                  child: const Text(
                     "Register",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ))

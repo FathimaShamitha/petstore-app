@@ -4,7 +4,7 @@ import 'package:petstore/Widgets/appbar.dart';
 
 class UserPetDetailsClass extends StatefulWidget {
   const UserPetDetailsClass({Key? key, required this.docId}) : super(key: key);
-  final docId;
+  final String docId;
 
   @override
   State<UserPetDetailsClass> createState() => _UserPetDetailsClassState();
@@ -16,7 +16,7 @@ class _UserPetDetailsClassState extends State<UserPetDetailsClass> {
     double ht = MediaQuery.of(context).size.height;
     double wth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: MyAppBarClass(),
+      appBar: const MyAppBarClass(),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("Pets")
@@ -24,14 +24,14 @@ class _UserPetDetailsClassState extends State<UserPetDetailsClass> {
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 color: Colors.orange,
               ),
             );
           }
           if (snapshot.hasError) {
-            return Center(child: Text("Error!!!!"));
+            return const Center(child: Text("Error!!!!"));
           }
           if (snapshot.hasData) {
             return Column(
@@ -43,7 +43,7 @@ class _UserPetDetailsClassState extends State<UserPetDetailsClass> {
                     image: NetworkImage(snapshot.data['imageurl']),
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.only(
@@ -52,19 +52,19 @@ class _UserPetDetailsClassState extends State<UserPetDetailsClass> {
                       children: [
                         Text(
                           " ${snapshot.data['breed']}",
-                          style: TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                         ),
                         Text(
                           "${snapshot.data['fur']}",
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
                         Text(
                           "${snapshot.data['age']}, ${snapshot.data['gender']}",
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
                         Text(
                           " ${snapshot.data['price']}",
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ],
                     ),
@@ -72,11 +72,11 @@ class _UserPetDetailsClassState extends State<UserPetDetailsClass> {
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
-                    onPressed: () {}, child: Text("Add To Cart",style: TextStyle(color: Colors.white,fontSize: 18),))
+                    onPressed: () {}, child: const Text("Add To Cart",style: TextStyle(color: Colors.white,fontSize: 18),))
               ],
             );
           } else {
-            return Center(
+            return const Center(
               child: Text("Something went wrong"),
             );
           }

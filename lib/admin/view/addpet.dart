@@ -2,6 +2,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petstore/Widgets/appbar.dart';
+import 'package:petstore/Widgets/carouselslider.dart';
 import 'package:provider/provider.dart';
 
 import '../../Widgets/simpletextfield.dart';
@@ -28,41 +29,18 @@ class _AddPetsClassState extends State<AddPetsClass> {
 
   @override
   Widget build(BuildContext context) {
-    double ht = MediaQuery.of(context).size.height;
-    double wth = MediaQuery.of(context).size.width;
     final imgObj = Provider.of<ImageUpload>(context);
     final petDetailsObj = Provider.of<AddDetails>(context);
     return Scaffold(
-      appBar: MyAppBarClass(),
+      appBar: const MyAppBarClass(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            imgObj.image == null
-                ? Container(
-                    height: ht / 3,
-                    width: wth,
-                    child: InkWell(
-                      onTap: () {
-                        imgObj.uploadImage();
-                      },
-                      child: Icon(
-                        Icons.add_a_photo_outlined,
-                        size: 40,
-                        color: Colors.orange,
-                      ),
-                    ),
-                  )
-                : Container(
-                    height: ht / 3,
-                    width: wth,
-                    child: Image(
-                      image: FileImage(imgObj.image!),
-                    ),
-                  ),
-            Divider(),
+            const MyCarouselSlider(),
+            const Divider(),
             Row(children: [
-              Padding(
-                padding: const EdgeInsets.only(
+              const Padding(
+                padding: EdgeInsets.only(
                   left: 10,
                   right: 10,
                   top: 10,
@@ -78,8 +56,8 @@ class _AddPetsClassState extends State<AddPetsClass> {
                   value: selectedCategory,
                   items: MyConstants().petType.map((String c) {
                     return DropdownMenuItem(
-                      child: Text(c),
                       value: c,
+                      child: Text(c),
                     );
                   }).toList(),
                   onChanged: (value) {
@@ -89,8 +67,8 @@ class _AddPetsClassState extends State<AddPetsClass> {
                   },
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10, left: 20, right: 10),
+              const Padding(
+                padding: EdgeInsets.only(top: 10, left: 20, right: 10),
                 child: Text(
                   "Fur Colour :",
                   style: TextStyle(fontSize: 18),
@@ -102,8 +80,8 @@ class _AddPetsClassState extends State<AddPetsClass> {
                     value: selectedColor,
                     items: MyConstants().furColor.map((String f) {
                       return DropdownMenuItem(
-                        child: Text(f),
                         value: f,
+                        child: Text(f),
                       );
                     }).toList(),
                     onChanged: (value) {
@@ -120,8 +98,8 @@ class _AddPetsClassState extends State<AddPetsClass> {
             ),
             Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 10),
+                const Padding(
+                  padding: EdgeInsets.only(left: 10, top: 10),
                   child: Text(
                     "Gender :",
                     style: TextStyle(fontSize: 18),
@@ -137,7 +115,7 @@ class _AddPetsClassState extends State<AddPetsClass> {
                           gender = value!;
                         });
                       },
-                      child: Text("Male")),
+                      child: const Text("Male")),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10, left: 10),
@@ -149,7 +127,7 @@ class _AddPetsClassState extends State<AddPetsClass> {
                           gender = value!;
                         });
                       },
-                      child: Text("Female")),
+                      child: const Text("Female")),
                 )
               ],
             ),
@@ -160,12 +138,7 @@ class _AddPetsClassState extends State<AddPetsClass> {
             ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
                 onPressed: () async {
-                  var img_ref = await FirebaseStorage.instance
-                      .ref()
-                      .child("MyImages/${imgObj.image!.path}");
-                  task = img_ref.putFile(imgObj.image!);
-                  final snap = await task!.whenComplete(() {});
-                  var imageurl = await snap.ref.getDownloadURL();
+                  imgObj.uploadImage();
                   petDetailsObj.addPetDetails(
                       selectedCategory,
                       breedController.text,
@@ -173,14 +146,14 @@ class _AddPetsClassState extends State<AddPetsClass> {
                       ageController.text,
                       gender,
                       priceController.text,
-                      imageurl);
+                      imgObj.imageUrl);
                   Fluttertoast.showToast(msg: "Added Successfully");
                   setState(() {
-                    imgObj.image = null;
+                    imgObj.image.clear();
                   });
                   Navigator.pop(context);
                 },
-                child: Text(
+                child: const Text(
                   "Add",
                   style: TextStyle(color: Colors.white),
                 ))

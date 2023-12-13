@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:petstore/user/view/petdeatilsview.dart';
 
-import '../../Widgets/customWidget1.dart';
+import '../../Widgets/customwidget1.dart';
 
 class UserCatViewClass extends StatelessWidget {
   const UserCatViewClass({Key? key}) : super(key: key);
@@ -17,21 +17,21 @@ class UserCatViewClass extends StatelessWidget {
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 color: Colors.orange,
               ),
             );
           }
           if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text("Error"),
             );
           }
           if (snapshot.hasData) {
             return GridView.builder(
                 itemCount: snapshot.data.docs.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 1,
                     childAspectRatio: 0.7,
@@ -53,7 +53,7 @@ class UserCatViewClass extends StatelessWidget {
                   );
                 });
           } else {
-            return Center(
+            return const Center(
               child: Text("Something Went Wrong"),
             );
           }

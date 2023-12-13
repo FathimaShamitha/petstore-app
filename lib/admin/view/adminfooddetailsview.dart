@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:petstore/Widgets/appbar.dart';
 
 class AdminFoodDetailsViewClass extends StatefulWidget {
-  const AdminFoodDetailsViewClass({Key? key, required this.docId}) : super(key: key);
+  const AdminFoodDetailsViewClass({Key? key, required this.docId})
+      : super(key: key);
   final docId;
 
   @override
@@ -17,7 +18,7 @@ class _AdminFoodDetailsViewClassState extends State<AdminFoodDetailsViewClass> {
     double ht = MediaQuery.of(context).size.height;
     double wth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: MyAppBarClass(),
+      appBar: const MyAppBarClass(),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("Foods")
@@ -25,14 +26,14 @@ class _AdminFoodDetailsViewClassState extends State<AdminFoodDetailsViewClass> {
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 color: Colors.orange,
               ),
             );
           }
           if (snapshot.hasError) {
-            return Center(child: Text("Error!!!!"));
+            return const Center(child: Text("Error!!!!"));
           }
           if (snapshot.hasData) {
             return Column(
@@ -44,7 +45,7 @@ class _AdminFoodDetailsViewClassState extends State<AdminFoodDetailsViewClass> {
                     image: NetworkImage(snapshot.data['image']),
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.only(
@@ -54,33 +55,32 @@ class _AdminFoodDetailsViewClassState extends State<AdminFoodDetailsViewClass> {
                       children: [
                         Text(
                           "Brand : ${snapshot.data['name']}",
-                          style: TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                         ),
-                        Divider(),
+                        const Divider(),
                         Text(
                           "Category : ${snapshot.data['category']}",
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
-                        Divider(),
+                        const Divider(),
                         Text(
                           "Quantity : ${snapshot.data['quantity']}",
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
-                        Divider(),
+                        const Divider(),
                         Text(
                           "Price : ${snapshot.data['price']}",
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
-                        Divider(),
+                        const Divider(),
                       ],
                     ),
                   ),
                 ),
-                ElevatedButton(onPressed: () {}, child: Text("Edit"))
               ],
             );
           } else {
-            return Center(
+            return const Center(
               child: Text("Something went wrong"),
             );
           }

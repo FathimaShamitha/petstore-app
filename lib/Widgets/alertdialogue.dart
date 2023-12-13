@@ -22,11 +22,11 @@ class MyAlertDialogueClass extends StatelessWidget {
     return AlertDialog(
       title: Text(
         title,
-        style: TextStyle(fontSize: 18),
+        style: const TextStyle(fontSize: 18),
       ),
       content: Text(
         content,
-        style: TextStyle(fontSize: 15),
+        style: const TextStyle(fontSize: 15),
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       actions: [
@@ -36,7 +36,7 @@ class MyAlertDialogueClass extends StatelessWidget {
             },
             child: Text(
               no,
-              style: TextStyle(color: Colors.orange),
+              style: const TextStyle(color: Colors.orange),
             )),
         TextButton(
             onPressed: () {
@@ -44,7 +44,7 @@ class MyAlertDialogueClass extends StatelessWidget {
             },
             child: Text(
               yes,
-              style: TextStyle(color: Colors.orange),
+              style: const TextStyle(color: Colors.orange),
             )),
       ],
     );

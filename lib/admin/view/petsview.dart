@@ -19,9 +19,9 @@ class PetsViewClass extends StatelessWidget {
             backgroundColor: Colors.orange,
             title: Text(
               MyConstants().appTitle,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
-            bottom: TabBar(
+            bottom: const TabBar(
               tabs: [
                 MyTabClass(title: 'All'),
                 MyTabClass(title: 'Dogs'),
@@ -30,7 +30,7 @@ class PetsViewClass extends StatelessWidget {
               indicatorColor: Colors.white,
             ),
           ),
-          body: TabBarView(
+          body: const TabBarView(
             children: [
               AdminAllPetsClass(),
               AdminDogsViewClass(),
