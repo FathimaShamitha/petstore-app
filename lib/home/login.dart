@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petstore/admin/view/adminhome.dart';
 import 'package:petstore/user/view/register.dart';
-import 'package:petstore/user/view/userhome.dart';
 import 'package:petstore/utilities/constants.dart';
+
+import '../user/view/userhomeview.dart';
 
 class LoginClass extends StatefulWidget {
   @override

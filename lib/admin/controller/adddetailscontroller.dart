@@ -12,7 +12,8 @@ class AddDetails extends ChangeNotifier {
       "age": age,
       "gender": gender,
       "price": price,
-      "imageurl": image
+      "imageurl": image,
+      "bookingStatus":'no'
     });
     notifyListeners();
   }

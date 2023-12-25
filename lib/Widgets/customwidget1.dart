@@ -15,25 +15,22 @@ class MyColumnClass extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 1,
-      child: Column(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height / 5,
-            width: MediaQuery.of(context).size.width / 2,
-            child: Image(
-              image: NetworkImage(imageUrl),
-              fit: BoxFit.fitHeight,
+      color: Colors.orange[100],
+      child: SizedBox(
+        width: 200,
+        child: Column(
+          children: [
+            SizedBox(height: 20,),
+            CircleAvatar(radius: 60,backgroundImage: NetworkImage(imageUrl),),
+            Text(
+              name,
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-          ),
-          Text(
-            name,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-          Text(
-            price,
-            style: const TextStyle(fontSize: 15),
-          )
-        ],
+            Text('${price} INR',
+              style: const TextStyle(fontSize: 15),
+            )
+          ],
+        ),
       ),
     );
   }

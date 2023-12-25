@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:petstore/user/view/userhomeview.dart';
 import 'package:provider/provider.dart';
 
 import 'admin/controller/adddetailscontroller.dart';
 import 'admin/controller/imagecontroller.dart';
-import 'admin/view/adminhome.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
           useMaterial3: true,
         ),
-        home: AdminHomeClass(),
+        home: UserHomeClass(),
       ),
     );
   }

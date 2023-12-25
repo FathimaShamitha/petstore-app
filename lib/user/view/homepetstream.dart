@@ -9,41 +9,42 @@ class HomePetStreamClass extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: StreamBuilder(
-      stream: FirebaseFirestore.instance.collection("Pets").snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Colors.orange,
-            ),
-          );
-        }
-        if (snapshot.hasError) {
-          return const Center(
-            child: Text("Error"),
-          );
-        }
-        if (snapshot.hasData) {
-          return ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 3,
-              itemBuilder: (context, index) {
+          stream: FirebaseFirestore.instance.collection("Pets").snapshots(),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.orange,
+                ),
+              );
+            }
+            if (snapshot.hasError) {
+              return const Center(
+                child: Text("Error"),
+              );
+            }
+            if (snapshot.hasData) {
+              return ListView.builder(itemCount: 3,scrollDirection: Axis.horizontal,itemBuilder: (context,index){
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    MyColumnClass(
-                        imageUrl: snapshot.data.docs[index]['imageurl'],
+                    MyColumnClass(imageUrl: snapshot.data.docs[index]['imageurl'],
                         name: snapshot.data.docs[index]['breed'],
-                        price: snapshot.data.docs[index]['price']),
+                        price: snapshot.data.docs[index]['price'])
                   ],
                 );
               });
-        } else {
-          return const Center(
-            child: Text("Something Went Wrong"),
-          );
-        }
-      },
-    ));
+                   /* return MyColumnClass(
+                        imageUrl: snapshot.data.docs[index]['imageurl'],
+                        name: snapshot.data.docs[index]['breed'],
+                        price: snapshot.data.docs[index]['price']);*/
+
+            } else {
+              return const Center(
+                child: Text("Something Went Wrong"),
+              );
+            }
+          },
+        ));
   }
 }

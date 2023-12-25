@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:petstore/user/view/petdeatilsview.dart';
+import 'package:petstore/user/view/petdetailsview.dart';
 
 import '../../Widgets/customwidget1.dart';
 
@@ -34,7 +34,7 @@ class UserDogViewClass extends StatelessWidget {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 1,
-                    childAspectRatio: 0.7,
+                    childAspectRatio: 0.9,
                     crossAxisSpacing: 2),
                 itemBuilder: (context, index) {
                   return InkWell(

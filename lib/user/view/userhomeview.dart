@@ -2,20 +2,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petstore/Widgets/homeappbar.dart';
-import 'package:petstore/Widgets/simplelisttile.dart';
 import 'package:petstore/user/view/homefoodstream.dart';
-import 'package:petstore/user/view/homepetstream.dart';
+import 'package:petstore/user/view/userbookingsview.dart';
 import 'package:petstore/user/view/userfoodview.dart';
 import 'package:petstore/user/view/userpetview.dart';
 
 import '../../Widgets/homecarouselslider.dart';
+import '../../Widgets/simplelisttile.dart';
 import '../../home/login.dart';
+import 'homepetstream.dart';
 
 class UserHomeClass extends StatelessWidget {
   const UserHomeClass({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    double ht = MediaQuery.of(context).size.height;
+    double wth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: HomeAppBarClass(
         func: () async {
@@ -26,40 +29,49 @@ class UserHomeClass extends StatelessWidget {
         },
       ),
       drawer: Drawer(
-        child: ListView(
-          children: [
-            const DrawerHeader(
-                child: CircleAvatar(
-              radius: 10,
-              backgroundColor: Colors.orange,
-              child: Text(
-                "A",
-                style: TextStyle(color: Colors.white, fontSize: 20),
+        width: MediaQuery.of(context).size.width * 0.6,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 60,
               ),
-            )),
-            InkWell(
-                onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => const UserHomeClass()));
+              InkWell(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UserHomeClass()));
+                  },
+                  child: const MySimpleListTileClass(
+                      myicon: Icons.home, title: 'Home')),
+              const MySimpleListTileClass(
+                  myicon: Icons.account_circle, title: 'Profile'),
+              InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>UserBookingsViewClass()));
                 },
-                child:
-                    const MySimpleListTileClass(myicon: Icons.home, title: 'Home')),
-            const MySimpleListTileClass(
-                myicon: Icons.account_circle, title: 'Profile'),
-            const MySimpleListTileClass(myicon: Icons.shopping_cart, title: 'Cart'),
-            const MySimpleListTileClass(
-                myicon: Icons.shopping_bag, title: 'Purchases'),
-            const MySimpleListTileClass(myicon: Icons.settings, title: 'Settings'),
-            const MySimpleListTileClass(
-                myicon: Icons.info_outline_rounded, title: 'About'),
-          ],
+                child: const MySimpleListTileClass(
+                    myicon: Icons.bookmark_outline, title: 'My Bookings'),
+              ),
+              const MySimpleListTileClass(
+                  myicon: Icons.shopping_bag, title: 'Cart'),
+              const MySimpleListTileClass(
+                  myicon: Icons.settings, title: 'Settings'),
+              const MySimpleListTileClass(
+                  myicon: Icons.info_outline_rounded, title: 'About'),
+              Divider()
+            ],
+          ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      body: Container(
+        height: ht,
+        width: wth,
+        child: ListView(
           children: [
-            const MyCarouselClass(),
+            MyCarouselClass(),
             const Padding(
               padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
               child: Text(
@@ -70,10 +82,7 @@ class UserHomeClass extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(
-                height: MediaQuery.of(context).size.height / 3,
-                width: MediaQuery.of(context).size.width,
-                child: const HomePetStreamClass()),
+            SizedBox(height: 200, child: const HomePetStreamClass()),
             Padding(
               padding: const EdgeInsets.only(left: 250),
               child: TextButton(
@@ -89,7 +98,7 @@ class UserHomeClass extends StatelessWidget {
                   )),
             ),
             const Padding(
-              padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
+              padding: EdgeInsets.only(left: 20, bottom: 10),
               child: Text(
                 "Foods",
                 style: TextStyle(
@@ -99,9 +108,9 @@ class UserHomeClass extends StatelessWidget {
               ),
             ),
             SizedBox(
-                height: MediaQuery.of(context).size.height / 3,
-                width: MediaQuery.of(context).size.width,
-                child: const HomeFoodStreamClass()),
+              height: 200,
+              child: HomeFoodStreamClass(),
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 250),
               child: TextButton(
