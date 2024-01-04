@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:petstore/utilities/constants.dart';
+import 'package:petstore/utilities/textstyles.dart';
 
 class MyCarouselClass extends StatefulWidget {
   const MyCarouselClass({Key? key}) : super(key: key);
@@ -10,12 +11,6 @@ class MyCarouselClass extends StatefulWidget {
 }
 
 class _MyCarouselClassState extends State<MyCarouselClass> {
-  final carouselList = [
-    "assets/images/homwview4.jpg",
-    "assets/images/homwview3.jpg",
-  ];
-  int currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,36 +19,34 @@ class _MyCarouselClassState extends State<MyCarouselClass> {
         height: MediaQuery.of(context).size.height / 4,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), color: Colors.orange),
-        child: Stack(
-          children: [
-            CarouselSlider.builder(
-                itemCount: carouselList.length,
-                itemBuilder: (context, index, realindex) {
-                  return Image(
-                    image: AssetImage(carouselList[index]),
-                    fit: BoxFit.fitHeight,
-                  );
-                },
-                options: CarouselOptions(
-                    viewportFraction: 2,
-                    disableCenter: true,
-                    enableInfiniteScroll: true,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        currentIndex = index;
-                      });
-                    })),
-            Positioned(
-                left: 20,
-                right: 20,
-                bottom: 5,
-                child: DotsIndicator(
-                  dotsCount: carouselList.length,
-                  position: currentIndex,
-                ))
-          ],
+          borderRadius: BorderRadius.circular(10),
         ),
+        child: CarouselSlider.builder(
+            itemCount: MyConstants().petImages.length,
+            itemBuilder: (context, index, realindex) {
+              return Card(
+                child: Column(
+                  children: [
+                    Container(
+                      height: 150,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(MyConstants().petImages[index]),
+                              fit: BoxFit.fitWidth)),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(MyConstants().petNames[index],
+                        style: MyTextStyle.titleText)
+                  ],
+                ),
+              );
+            },
+            options: CarouselOptions(
+              autoPlay: true,
+            )),
       ),
     );
   }

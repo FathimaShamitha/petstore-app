@@ -11,9 +11,7 @@ class MySimpleListTileClass extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(
-        myicon,
-        color: Colors.orange,
-      ),
+        myicon,),
       title: Text(title),
     );
   }

@@ -1,10 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:petstore/Widgets/customtext.dart';
 import 'package:petstore/Widgets/homeappbar.dart';
-import 'package:petstore/user/view/homefoodstream.dart';
 import 'package:petstore/user/view/userbookingsview.dart';
-import 'package:petstore/user/view/userfoodview.dart';
 import 'package:petstore/user/view/userpetview.dart';
 
 import '../../Widgets/homecarouselslider.dart';
@@ -29,6 +28,7 @@ class UserHomeClass extends StatelessWidget {
         },
       ),
       drawer: Drawer(
+        backgroundColor: Colors.purple[100],
         width: MediaQuery.of(context).size.width * 0.6,
         child: SingleChildScrollView(
           child: Column(
@@ -49,14 +49,15 @@ class UserHomeClass extends StatelessWidget {
               const MySimpleListTileClass(
                   myicon: Icons.account_circle, title: 'Profile'),
               InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>UserBookingsViewClass()));
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserBookingsViewClass()));
                 },
                 child: const MySimpleListTileClass(
                     myicon: Icons.bookmark_outline, title: 'My Bookings'),
               ),
-              const MySimpleListTileClass(
-                  myicon: Icons.shopping_bag, title: 'Cart'),
               const MySimpleListTileClass(
                   myicon: Icons.settings, title: 'Settings'),
               const MySimpleListTileClass(
@@ -71,17 +72,33 @@ class UserHomeClass extends StatelessWidget {
         width: wth,
         child: ListView(
           children: [
-            MyCarouselClass(),
-            const Padding(
-              padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
-              child: Text(
-                "Pets",
-                style: TextStyle(
-                    color: Colors.orange,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold),
+            Card(
+              color: Colors.purple[200],
+              child: Container(
+                height: ht * 0.3,
+                width: wth,
+                child: Column(
+                  children: [
+                    Image(
+                      image: AssetImage("assets/images/homeview.jpg"),
+                      fit: BoxFit.fitWidth,
+                    ),
+                    Center(
+                        child: Text(
+                      "Find Your Best Companion With Us",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.bold),
+                    )),
+                  ],
+                ),
               ),
             ),
+            MyCustomTextClass(txt: "Popular Pets"),
+            MyCarouselClass(),
+            MyCustomTextClass(txt: "Store"),
             SizedBox(height: 200, child: const HomePetStreamClass()),
             Padding(
               padding: const EdgeInsets.only(left: 250),
@@ -97,16 +114,7 @@ class UserHomeClass extends StatelessWidget {
                     style: TextStyle(color: Colors.blue),
                   )),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20, bottom: 10),
-              child: Text(
-                "Foods",
-                style: TextStyle(
-                    color: Colors.orange,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
+            /*MyCustomTextClass(txt: "Pet Foods"),
             SizedBox(
               height: 200,
               child: HomeFoodStreamClass(),
@@ -124,7 +132,7 @@ class UserHomeClass extends StatelessWidget {
                     "View All->",
                     style: TextStyle(color: Colors.blue),
                   )),
-            ),
+            ),*/
           ],
         ),
       ),

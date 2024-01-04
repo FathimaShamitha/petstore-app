@@ -3,6 +3,7 @@ import 'package:petstore/Widgets/simpletab.dart';
 import 'package:petstore/admin/view/adminallpetsview.dart';
 import 'package:petstore/admin/view/admincatsview.dart';
 import 'package:petstore/admin/view/admindogsview.dart';
+import 'package:petstore/utilities/colors.dart';
 
 import '../../utilities/constants.dart';
 
@@ -16,10 +17,9 @@ class PetsViewClass extends StatelessWidget {
         initialIndex: 0,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.orange,
+            backgroundColor: MyAppColor.primaryColor,
             title: Text(
               MyConstants().appTitle,
-              style: const TextStyle(color: Colors.white),
             ),
             bottom: const TabBar(
               tabs: [

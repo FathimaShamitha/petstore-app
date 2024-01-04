@@ -3,6 +3,7 @@ import 'package:petstore/Widgets/simpletab.dart';
 import 'package:petstore/user/view/userallpetsview.dart';
 import 'package:petstore/user/view/usercatsview.dart';
 import 'package:petstore/user/view/userdogsview.dart';
+import 'package:petstore/utilities/colors.dart';
 
 import '../../utilities/constants.dart';
 
@@ -16,13 +17,12 @@ class UserPetsViewClass extends StatelessWidget {
         initialIndex: 0,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.orange,
+            backgroundColor: MyAppColor.primaryColor,
             title: Text(
               MyConstants().appTitle,
-              style: const TextStyle(color: Colors.white),
             ),
             bottom: const TabBar(
-              tabs:  [
+              tabs: [
                 MyTabClass(title: 'All'),
                 MyTabClass(title: 'Dogs'),
                 MyTabClass(title: 'Cats'),

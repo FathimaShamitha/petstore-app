@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:petstore/Widgets/appbar.dart';
+import 'package:petstore/utilities/textstyles.dart';
 
 class AdminPetDetailsViewClass extends StatefulWidget {
   const AdminPetDetailsViewClass({Key? key, required this.docId})
@@ -27,12 +28,12 @@ class _AdminPetDetailsViewState extends State<AdminPetDetailsViewClass> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(
-                color: Colors.orange,
+                color: Colors.purple,
               ),
             );
           }
           if (snapshot.hasError) {
-            return const Center(child:  Text("Error!!!!"));
+            return const Center(child: Text("Error!!!!"));
           }
           if (snapshot.hasData) {
             return Column(
@@ -52,31 +53,25 @@ class _AdminPetDetailsViewState extends State<AdminPetDetailsViewClass> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Breed : ${snapshot.data['breed']}",
-                          style: const TextStyle(fontSize: 20),
-                        ),
+                        Text("Breed : ${snapshot.data['breed']}",
+                            style: MyTextStyle.bigText),
                         const Divider(),
-                        Text(
-                          "Age : ${snapshot.data['age']}",
-                          style: const TextStyle(fontSize: 18),
-                        ),
+                        Text("Age : ${snapshot.data['age']}",
+                            style: MyTextStyle.smallText),
                         const Divider(),
-                        Text(
-                          "Fur : ${snapshot.data['fur']}",
-                          style: const TextStyle(fontSize: 18),
-                        ),
+                        Text("Fur : ${snapshot.data['fur']}",
+                            style: MyTextStyle.smallText),
                         const Divider(),
-                        Text(
-                          "Gender : ${snapshot.data['gender']}",
-                          style: const TextStyle(fontSize: 18),
-                        ),
+                        Text("Gender : ${snapshot.data['gender']}",
+                            style: MyTextStyle.smallText),
                         const Divider(),
-                        Text(
-                          "Price : ${snapshot.data['price']}",
-                          style: const TextStyle(fontSize: 18),
-                        ),
+                        Text("Price : ${snapshot.data['price']}",
+                            style: MyTextStyle.smallText),
                         const Divider(),
+                        Center(
+                          child: ElevatedButton(
+                              onPressed: () {}, child: Text('Edit')),
+                        )
                       ],
                     ),
                   ),

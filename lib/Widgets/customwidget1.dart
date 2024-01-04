@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petstore/utilities/textstyles.dart';
 
 class MyColumnClass extends StatelessWidget {
   const MyColumnClass(
@@ -15,19 +16,21 @@ class MyColumnClass extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 1,
-      color: Colors.orange[100],
       child: SizedBox(
         width: 200,
         child: Column(
           children: [
-            SizedBox(height: 20,),
-            CircleAvatar(radius: 60,backgroundImage: NetworkImage(imageUrl),),
-            Text(
-              name,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+            SizedBox(
+              height: 10,
             ),
-            Text('${price} INR',
-              style: const TextStyle(fontSize: 15),
+            CircleAvatar(
+              radius: 65,
+              backgroundImage: NetworkImage(imageUrl),
+            ),
+            Text(name, style: MyTextStyle.headText),
+            Text(
+              '${price} INR',
+              style: MyTextStyle.subText,
             )
           ],
         ),

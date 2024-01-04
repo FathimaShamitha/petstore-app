@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:petstore/utilities/textstyles.dart';
 
 class MyTextClass extends StatelessWidget {
-  const MyTextClass({Key? key, required this.title, required this.content,}) : super(key: key);
+  const MyTextClass({
+    Key? key,
+    required this.title,
+    required this.content,
+  }) : super(key: key);
 
   final String title;
   final String content;
@@ -9,8 +14,8 @@ class MyTextClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10,top: 5,bottom: 5),
-      child: Text( "$title : $content", style: const TextStyle(fontSize:20 ),),
+      padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
+      child: Text("$title : $content", style: MyTextStyle.bodyText),
     );
   }
 }

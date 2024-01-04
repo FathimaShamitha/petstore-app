@@ -1,3 +1,4 @@
+/*
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -27,21 +28,45 @@ class _AddFoodClassState extends State<AddFoodClass> {
 
   @override
   Widget build(BuildContext context) {
-    final foodDetailsObj = Provider.of<AddDetails>(context);
-    final imageObj = Provider.of<ImageUpload>(context);
+    final foodDetailsObj = Provider.of<AddDetails>(context, listen: false);
+    final imageObj = Provider.of<ImageUpload>(context, listen: false);
+    final double ht = MediaQuery.of(context).size.height;
+    final double wth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: const MyAppBarClass(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const MyCarouselSlider(),
+            imageObj.myImage == null
+                ? Container(
+                    height: ht / 3,
+                    width: wth,
+                    child: InkWell(
+                      onTap: () {
+                        Provider.of<ImageUpload>(context, listen: false)
+                            .uploadImage();
+                      },
+                      child: const Icon(
+                        Icons.add_a_photo_outlined,
+                        size: 40,
+                        color: Colors.orange,
+                      ),
+                    ),
+                  )
+                : Container(
+                    height: ht / 3,
+                    width: wth,
+                    child: Image(
+                      image: FileImage(imageObj.myImage!),
+                    ),
+                  ),
             const Divider(),
-            MyTextFieldClass(hinttxt: 'Name', controller: nameController),
+            MyTextFieldClass(hinttxt: 'Name', controller: nameController, type: TextInputType.text,),
             Row(children: [
               Expanded(
                   child: MyTextFieldClass(
                 hinttxt: 'Category',
-                controller: categoryController,
+                controller: categoryController, type:TextInputType.text,
               )),
               const Padding(
                 padding:
@@ -72,7 +97,7 @@ class _AddFoodClassState extends State<AddFoodClass> {
             ]),
             MyTextFieldClass(
               hinttxt: 'Price',
-              controller: priceController,
+              controller: priceController, type: TextInputType.number,
             ),
             MyTextFieldClass(
               hinttxt: 'Quantity',
@@ -87,14 +112,15 @@ class _AddFoodClassState extends State<AddFoodClass> {
                   onPressed: () async {
                     imageObj.uploadImage();
                     foodDetailsObj.addFoodDetails(
-                        nameController.text,
-                        selectedType,
-                        categoryController.text,
-                        priceController.text,
-                        quantityController.text,
-                        imageObj.imageUrl.toList());
+                      nameController.text,
+                      selectedType,
+                      categoryController.text,
+                      priceController.text,
+                      quantityController.text,
+
+                    );
                     setState(() {
-                      imageObj.image.clear();
+                      imageObj.myImage == null;
                     });
                     Fluttertoast.showToast(msg: "Added Successfully");
                     Navigator.pop(context);
@@ -110,3 +136,4 @@ class _AddFoodClassState extends State<AddFoodClass> {
     );
   }
 }
+*/

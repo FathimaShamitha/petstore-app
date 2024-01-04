@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:petstore/utilities/textstyles.dart';
 
 class MyCardClass extends StatelessWidget {
   const MyCardClass(
-      {Key? key, required this.height, required this.width, required this.txt})
+      {Key? key,
+      required this.height,
+      required this.width,
+      required this.txt,
+      required this.myIcon})
       : super(key: key);
   final double height;
   final double width;
   final String txt;
+  final IconData myIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +28,10 @@ class MyCardClass extends StatelessWidget {
           children: [
             Text(
               txt,
-              style: const TextStyle(
-                  color: Colors.orange,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold),
+              style: MyTextStyle.titleText,
             ),
-            const Icon(
-              Icons.add,
-              color: Colors.orange,
-              size: 40,
+            Icon(
+              myIcon,
             )
           ],
         ),

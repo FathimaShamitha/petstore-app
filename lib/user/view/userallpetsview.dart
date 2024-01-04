@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petstore/user/view/petdetailsview.dart';
 
 import '../../Widgets/customwidget1.dart';
@@ -16,7 +17,7 @@ class UserAllPetsClass extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(
-                color: Colors.orange,
+                color: Colors.purple,
               ),
             );
           }
@@ -35,13 +36,35 @@ class UserAllPetsClass extends StatelessWidget {
                     crossAxisSpacing: 2),
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>UserPetDetailsClass(docId: snapshot.data.docs[index].id,)));
+                    onTap: () {
+                      snapshot.data.docs[index]['bookingStatus'] == "no"
+                          ? Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => UserPetDetailsClass(
+                                        docId: snapshot.data.docs[index].id,
+                                      )))
+                          : Fluttertoast.showToast(msg: "Already Booked");
                     },
-                    child: MyColumnClass(
-                        imageUrl: snapshot.data.docs[index]['imageurl'],
-                        name: snapshot.data.docs[index]['breed'],
-                        price: snapshot.data.docs[index]['price']),
+                    child: snapshot.data.docs[index]['bookingStatus'] == "no"
+                        ? MyColumnClass(
+                            imageUrl: snapshot.data.docs[index]['imageurl'],
+                            name: snapshot.data.docs[index]['breed'],
+                            price: snapshot.data.docs[index]['price'])
+                        : Stack(
+                            children: [
+                              MyColumnClass(
+                                  imageUrl: snapshot.data.docs[index]
+                                      ['imageurl'],
+                                  name: snapshot.data.docs[index]['breed'],
+                                  price: snapshot.data.docs[index]['price']),
+                              CircleAvatar(
+                                radius: 20,
+                                child: Icon(Icons.done_all_outlined),
+                                backgroundColor: Colors.purple,
+                              )
+                            ],
+                          ),
                   );
                 });
           } else {

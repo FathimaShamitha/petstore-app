@@ -23,7 +23,7 @@ class AdminCatsViewClass extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(
-                color: Colors.orange,
+                color: Colors.purple,
               ),
             );
           }

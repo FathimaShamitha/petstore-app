@@ -2,7 +2,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petstore/Widgets/appbar.dart';
-import 'package:petstore/Widgets/carouselslider.dart';
 import 'package:provider/provider.dart';
 
 import '../../Widgets/simpletextfield.dart';
@@ -29,14 +28,36 @@ class _AddPetsClassState extends State<AddPetsClass> {
 
   @override
   Widget build(BuildContext context) {
-    final imgObj = Provider.of<ImageUpload>(context);
     final petDetailsObj = Provider.of<AddDetails>(context);
+    final imageObj = Provider.of<ImageUpload>(context);
+    final double ht = MediaQuery.of(context).size.height;
+    final double wth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: const MyAppBarClass(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const MyCarouselSlider(),
+            imageObj.myImage == null
+                ? Container(
+                    height: ht / 3,
+                    width: wth,
+                    child: InkWell(
+                      onTap: () {
+                        imageObj.uploadImage();
+                      },
+                      child: const Icon(
+                        Icons.add_a_photo_outlined,
+                        size: 40,
+                      ),
+                    ),
+                  )
+                : Container(
+                    height: ht / 3,
+                    width: wth,
+                    child: Image(
+                      image: FileImage(imageObj.myImage!),
+                    ),
+                  ),
             const Divider(),
             Row(children: [
               const Padding(
@@ -91,10 +112,15 @@ class _AddPetsClassState extends State<AddPetsClass> {
                     }),
               )
             ]),
-            MyTextFieldClass(hinttxt: 'Breed', controller: breedController),
+            MyTextFieldClass(
+              hinttxt: 'Breed',
+              controller: breedController,
+              type: TextInputType.text,
+            ),
             MyTextFieldClass(
               hinttxt: 'Age',
               controller: ageController,
+              type: TextInputType.text,
             ),
             Row(
               children: [
@@ -134,11 +160,16 @@ class _AddPetsClassState extends State<AddPetsClass> {
             MyTextFieldClass(
               hinttxt: 'Price',
               controller: priceController,
+              type: TextInputType.number,
             ),
             ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
                 onPressed: () async {
-                  imgObj.uploadImage();
+                  var imgRef = await FirebaseStorage.instance
+                      .ref()
+                      .child("MyImages/${imageObj.myImage!.path}");
+                  task = imgRef.putFile(imageObj.myImage!);
+                  final snap = await task!.whenComplete(() {});
+                  var imageUrl = await snap.ref.getDownloadURL();
                   petDetailsObj.addPetDetails(
                       selectedCategory,
                       breedController.text,
@@ -146,16 +177,17 @@ class _AddPetsClassState extends State<AddPetsClass> {
                       ageController.text,
                       gender,
                       priceController.text,
-                      imgObj.imageUrl);
+                      imageUrl);
                   Fluttertoast.showToast(msg: "Added Successfully");
                   setState(() {
-                    imgObj.image.clear();
+                    imageObj.myImage = null;
+                    breedController.clear();
+                    ageController.clear();
+                    priceController.clear();
                   });
-                  Navigator.pop(context);
                 },
                 child: const Text(
                   "Add",
-                  style: TextStyle(color: Colors.white),
                 ))
           ],
         ),

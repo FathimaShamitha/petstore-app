@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petstore/utilities/textstyles.dart';
 
 class MyTabClass extends StatelessWidget {
   const MyTabClass({Key? key, required this.title}) : super(key: key);
@@ -9,7 +10,7 @@ class MyTabClass extends StatelessWidget {
     return Tab(
       child: Text(
         title,
-        style: const TextStyle(color: Colors.white, fontSize: 18),
+        style: MyTextStyle.bodyText
       ),
     );
   }

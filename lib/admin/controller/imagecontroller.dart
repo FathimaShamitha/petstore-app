@@ -1,11 +1,18 @@
 import 'dart:io';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageUpload extends ChangeNotifier {
-  List<File> image = [];
+  File? myImage;
+
+  uploadImage() async {
+    var img = await ImagePicker().pickImage(source: ImageSource.gallery);
+    myImage = File(img!.path);
+    notifyListeners();
+  }
+
+/*List<File> image = [];
   List imageUrl = [];
 
   Future<void> getImage() async {
@@ -17,7 +24,7 @@ class ImageUpload extends ChangeNotifier {
     notifyListeners();
   }
 
-  /*Future<void> uploadImage() async {
+  */ /*Future<void> uploadImage() async {
     for (var img in image) {
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference imgRef =
@@ -28,16 +35,18 @@ class ImageUpload extends ChangeNotifier {
         imageUrl.add(url);
       });
     }
-  }*/
+  }*/ /*
 
   Future<void> uploadImage() async {
     image.forEach((element) async {
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-      final imgRef = FirebaseStorage.instance.ref().child("PET_IMAGES/$fileName");
+      final imgRef =
+          FirebaseStorage.instance.ref().child("PET_IMAGES/$fileName");
       UploadTask task = imgRef.putFile(element);
       final snap = await task!.whenComplete(() {});
       var imgLink = await snap.ref.getDownloadURL();
       imageUrl.add(imgLink);
     });
-  }
+    notifyListeners();
+  }*/
 }

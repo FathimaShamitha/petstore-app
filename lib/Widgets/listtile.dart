@@ -17,35 +17,37 @@ class MyListTileClass extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: SizedBox(
-          height: 50,
-          width: 50,
-          child: Image(
-            image: NetworkImage(image),
-            fit: BoxFit.cover,
-          )),
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            name,
-          ),
-          Text(
-            price,
-          ),
-        ],
+    return Card(
+      child: ListTile(
+        leading: SizedBox(
+            height: 50,
+            width: 50,
+            child: Image(
+              image: NetworkImage(image),
+              fit: BoxFit.cover,
+            )),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              name,
+            ),
+            Text(
+              price,
+            ),
+          ],
+        ),
+        subtitle: Text(qty),
+        trailing: InkWell(
+            onTap: () {
+              func();
+            },
+            child: const Icon(
+              Icons.delete,
+              color: Colors.purple,
+              size: 20,
+            )),
       ),
-      subtitle: Text(qty),
-      trailing: InkWell(
-          onTap: () {
-            func();
-          },
-          child: const Icon(
-            Icons.delete,
-            color: Colors.orange,
-            size: 20,
-          )),
     );
   }
 }

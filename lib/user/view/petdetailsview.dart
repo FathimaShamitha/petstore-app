@@ -46,7 +46,7 @@ class _UserPetDetailsClassState extends State<UserPetDetailsClass> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(
-                color: Colors.orange,
+                color: Colors.purple,
               ),
             );
           }
@@ -89,55 +89,37 @@ class _UserPetDetailsClassState extends State<UserPetDetailsClass> {
                     )
                   ],
                 ),
-                snapshot.data['bookingStatus'] == 'no'
-                    ? Container(
-                        width: MediaQuery.of(context).size.width * 0.7,
-                        height: 60,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(90),
-                            color: Colors.orange),
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.orange),
-                            onPressed: () async {
-                              await FirebaseFirestore.instance
-                                  .collection('Pets')
-                                  .doc(widget.docId)
-                                  .update({'bookingStatus': 'yes'});
-                              setState(() {});
-                              Fluttertoast.showToast(msg: 'Booked');
-                              var db_ref = await FirebaseFirestore.instance
-                                  .collection("Bookings")
-                                  .add({
-                                "uid": uid,
-                                "breed": snapshot.data['breed'],
-                                "fur": snapshot.data['fur'],
-                                "age": snapshot.data['age'],
-                                "gender": snapshot.data['gender'],
-                                "price": snapshot.data['price'],
-                                "imageurl": snapshot.data['imageurl'],
-                                "status": "booked",
-                              });
-                            },
-                            child: const Text(
-                              "Book",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            )),
-                      )
-                    : Container(
-                        width: MediaQuery.of(context).size.width * 0.7,
-                        height: 60,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(90),
-                            color: Colors.orange),
-                        child: Center(
-                          child: const Text(
-                            "Booked",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                        ),
-                      )
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(90),
+                      color: Colors.purple),
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        await FirebaseFirestore.instance
+                            .collection('Pets')
+                            .doc(widget.docId)
+                            .update({'bookingStatus': 'yes'});
+                        setState(() {});
+                        Fluttertoast.showToast(msg: 'Booked');
+                        var db_ref = await FirebaseFirestore.instance
+                            .collection("Bookings")
+                            .add({
+                          "uid": uid,
+                          "breed": snapshot.data['breed'],
+                          "fur": snapshot.data['fur'],
+                          "age": snapshot.data['age'],
+                          "gender": snapshot.data['gender'],
+                          "price": snapshot.data['price'],
+                          "imageurl": snapshot.data['imageurl'],
+                          "status": "booked",
+                        });
+                      },
+                      child: const Text(
+                        "Book",
+                      )),
+                )
               ],
             );
           } else {

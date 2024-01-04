@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:petstore/utilities/colors.dart';
+import 'package:petstore/utilities/textstyles.dart';
 
 import '../../Widgets/appbar.dart';
 
@@ -27,7 +29,7 @@ class _UserFoodDetailsClassState extends State<UserFoodDetailsClass> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(
-                color: Colors.orange,
+                color: Colors.purple,
               ),
             );
           }
@@ -51,33 +53,22 @@ class _UserFoodDetailsClassState extends State<UserFoodDetailsClass> {
                         left: 10, top: 10, bottom: 10, right: 10),
                     child: Column(
                       children: [
-                        Text(
-                          " ${snapshot.data['name']}",
-                          style: const TextStyle(fontSize: 20),
-                        ),
-                        Text(
-                          "${snapshot.data['category']}",
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                        Text(
-                          "${snapshot.data['quantity']}",
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                        Text(
-                          " ${snapshot.data['price']}",
-                          style: const TextStyle(fontSize: 18),
-                        ),
+                        Text(" ${snapshot.data['name']}",
+                            style: MyTextStyle.bigText),
+                        Text("${snapshot.data['category']}",
+                            style: MyTextStyle.smallText),
+                        Text("${snapshot.data['quantity']}",
+                            style: MyTextStyle.smallText),
+                        Text(" ${snapshot.data['price']}",
+                            style: MyTextStyle.smallText),
                       ],
                     ),
                   ),
                 ),
                 ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange),
                     onPressed: () {},
                     child: const Text(
                       "Add To Cart",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
                     ))
               ],
             );

@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:petstore/Widgets/appbar.dart';
 
+import '../../Widgets/customwidget1.dart';
+
 class UserBookingsViewClass extends StatefulWidget {
   const UserBookingsViewClass({Key? key}) : super(key: key);
 
@@ -30,6 +32,8 @@ class _UserBookingsViewClassState extends State<UserBookingsViewClass> {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: MyAppBarClass(),
       body: StreamBuilder(
@@ -41,54 +45,28 @@ class _UserBookingsViewClassState extends State<UserBookingsViewClass> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(
-                color: Colors.orange,
+                color: Colors.purple,
               ),
             );
           }
-          if (!snapshot.hasData) {
+          if (snapshot.hasData!) {
             return Center(
               child: Text("No Bookings Yet"),
             );
           }
           if (snapshot.hasData) {
-            List BookingsList = snapshot.data.docs;
-            return ListView.builder(
-                itemCount: BookingsList.length,
+            return GridView.builder(
+                itemCount: snapshot.data.docs.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 1,
+                    childAspectRatio: 0.9,
+                    crossAxisSpacing: 2),
                 itemBuilder: (context, index) {
-                  return Container(
-                    height: MediaQuery.of(context).size.width * 0.5,
-                    width: MediaQuery.of(context).size.width,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                            height: 400,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 10, bottom: 10, right: 10, left: 10),
-                              child: Image(
-                                image: NetworkImage(
-                                    BookingsList[index]['imageurl']),
-                              ),
-                            )),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              BookingsList[index]['breed'],
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            Text(BookingsList[index]['fur'],
-                                style: TextStyle(fontSize: 18)),
-                            Text(BookingsList[index]['age'],
-                                style: TextStyle(fontSize: 18)),
-                            Text("${BookingsList[index]['price']} INR",
-                                style: TextStyle(fontSize: 18)),
-                          ],
-                        )
-                      ],
-                    ),
-                  );
+                  return MyColumnClass(
+                      imageUrl: snapshot.data.docs[index]['imageurl'],
+                      name: snapshot.data.docs[index]['breed'],
+                      price: snapshot.data.docs[index]['price']);
                 });
           } else {
             return Center(

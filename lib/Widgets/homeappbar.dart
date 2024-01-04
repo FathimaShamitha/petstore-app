@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petstore/utilities/colors.dart';
 
 import '../utilities/constants.dart';
 
@@ -9,11 +10,7 @@ class HomeAppBarClass extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.orange,
-      title: Text(
-        MyConstants().appTitle,
-        style: const TextStyle(color: Colors.white),
-      ),
+      title: Text(MyConstants().appTitle,),
       actions: [
         InkWell(
           onTap: () {
@@ -21,8 +18,6 @@ class HomeAppBarClass extends StatelessWidget implements PreferredSizeWidget {
           },
           child: const Icon(
             Icons.logout,
-            color: Colors.white,
-            size: 20,
           ),
         ),
         const SizedBox(

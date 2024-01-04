@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:petstore/Widgets/customwidget1.dart';
+import 'package:petstore/user/view/userpetview.dart';
 
 class HomePetStreamClass extends StatelessWidget {
   const HomePetStreamClass({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class HomePetStreamClass extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
                 child: CircularProgressIndicator(
-                  color: Colors.orange,
+                  color: Colors.purple,
                 ),
               );
             }
@@ -28,9 +29,14 @@ class HomePetStreamClass extends StatelessWidget {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    MyColumnClass(imageUrl: snapshot.data.docs[index]['imageurl'],
-                        name: snapshot.data.docs[index]['breed'],
-                        price: snapshot.data.docs[index]['price'])
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>UserPetsViewClass()));
+                      },
+                      child: MyColumnClass(imageUrl: snapshot.data.docs[index]['imageurl'],
+                          name: snapshot.data.docs[index]['breed'],
+                          price: snapshot.data.docs[index]['price']),
+                    )
                   ],
                 );
               });
