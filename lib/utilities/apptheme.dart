@@ -9,8 +9,10 @@ class AppTheme {
         backgroundColor: MyAppColor.primaryColor,
         titleTextStyle: MyTextStyle.appBarText,
         centerTitle: true),
-    iconTheme: IconThemeData(color: MyAppColor.primaryColor2, size: 20),
+    iconTheme: IconThemeData(color: MyAppColor.primaryColor, size: 25),
     brightness: Brightness.light,
+    shadowColor: MyAppColor.primaryColor,
+    hoverColor: MyAppColor.primaryColor,
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
       backgroundColor: MaterialStatePropertyAll(MyAppColor.primaryColor2),
@@ -19,20 +21,25 @@ class AppTheme {
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
     )),
     cardTheme: CardTheme(
-        color: MyAppColor.primaryColor2,
-        elevation: 0,
+        color: MyAppColor.primaryColor3,
+        elevation: 1,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-    textTheme: TextTheme(bodyMedium: MyTextStyle.bodyText),
     dividerTheme:
-        DividerThemeData(color: MyAppColor.primaryColor, thickness: 1),
+        DividerThemeData(color: MyAppColor.primaryColor2, thickness: 1),
     listTileTheme: ListTileThemeData(
-        titleTextStyle: MyTextStyle.listTileText,
-        subtitleTextStyle: MyTextStyle.listTileText,
-        iconColor: MyAppColor.primaryColor2,
-        textColor: MyAppColor.primaryColor4),
+      tileColor: MyAppColor.primaryColor3,
+      titleTextStyle: MyTextStyle.titleText,
+      subtitleTextStyle: MyTextStyle.subText,
+      iconColor: MyAppColor.primaryColor2,
+    ),
     dialogTheme: DialogTheme(
         backgroundColor: MyAppColor.primaryColor3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         titleTextStyle: MyTextStyle.bodyText),
+    textSelectionTheme: TextSelectionThemeData(
+        cursorColor: MyAppColor.primaryColor,
+        selectionColor: MyAppColor.primaryColor,
+        selectionHandleColor: MyAppColor.primaryColor),
+    
   );
 }

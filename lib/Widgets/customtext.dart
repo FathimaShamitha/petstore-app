@@ -10,7 +10,7 @@ class MyCustomTextClass extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 20, top: 20, bottom: 5),
-      child: Text(txt, style: MyTextStyle.titleText),
+      child: Text(txt, style: MyTextStyle.headText),
     );
   }
 }

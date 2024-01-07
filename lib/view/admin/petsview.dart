@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:petstore/Widgets/simpletab.dart';
-import 'package:petstore/admin/view/adminallpetsview.dart';
-import 'package:petstore/admin/view/admincatsview.dart';
-import 'package:petstore/admin/view/admindogsview.dart';
 import 'package:petstore/utilities/colors.dart';
 
 import '../../utilities/constants.dart';
+import 'adminallpetsview.dart';
+import 'admincatsview.dart';
+import 'admindogsview.dart';
 
 class PetsViewClass extends StatelessWidget {
   const PetsViewClass({Key? key}) : super(key: key);

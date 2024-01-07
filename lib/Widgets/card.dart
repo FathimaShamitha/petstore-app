@@ -27,12 +27,9 @@ class MyCardClass extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              txt,
-              style: MyTextStyle.titleText,
+              txt, style: MyTextStyle.titleText,
             ),
-            Icon(
-              myIcon,
-            )
+            Icon(myIcon,)
           ],
         ),
       ),

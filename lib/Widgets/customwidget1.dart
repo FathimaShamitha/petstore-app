@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petstore/utilities/colors.dart';
 import 'package:petstore/utilities/textstyles.dart';
 
 class MyColumnClass extends StatelessWidget {
@@ -26,8 +27,9 @@ class MyColumnClass extends StatelessWidget {
             CircleAvatar(
               radius: 65,
               backgroundImage: NetworkImage(imageUrl),
+              backgroundColor: MyAppColor.primaryColor1,
             ),
-            Text(name, style: MyTextStyle.headText),
+            Text(name, style: MyTextStyle.titleText),
             Text(
               '${price} INR',
               style: MyTextStyle.subText,

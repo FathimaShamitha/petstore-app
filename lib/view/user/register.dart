@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:petstore/utilities/textstyles.dart';
 
+import '../../Widgets/headWidget.dart';
 import '../../home/login.dart';
 
 class RegisterClass extends StatefulWidget {
@@ -25,21 +27,8 @@ class RegisterClassState extends State<RegisterClass> {
             key: formKey,
             child: Column(
               children: [
-                SizedBox(
-                  height: 200,
-                  child: Image(
-                    image: AssetImage("assets/images/cat_dog.jpg"),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 20),
-                  child: Text(
-                    "Register",
-                    style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.purple),
-                  ),
+                MyHeadingClass(
+                  txt: 'Register',
                 ),
                 Padding(
                   padding:

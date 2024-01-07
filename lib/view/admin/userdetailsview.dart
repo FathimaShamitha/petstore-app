@@ -6,7 +6,7 @@ import 'package:petstore/Widgets/listtile.dart';
 import 'package:provider/provider.dart';
 
 import '../../Widgets/alertdialogue.dart';
-import '../controller/adddetailscontroller.dart';
+import '../../controller/admincontroller.dart';
 
 class AdminUserDetailsViewClass extends StatelessWidget {
   const AdminUserDetailsViewClass({Key? key, required this.uId})
@@ -30,11 +30,6 @@ class AdminUserDetailsViewClass extends StatelessWidget {
               ),
             );
           }
-          if (!snapshot.hasData!) {
-            return Center(
-              child: Text('No Bookings Done'),
-            );
-          }
           if (snapshot.hasData) {
             List BookingList = snapshot.data.docs;
             return ListView.builder(
@@ -44,7 +39,6 @@ class AdminUserDetailsViewClass extends StatelessWidget {
                     image: BookingList[index]['imageurl'],
                     name: BookingList[index]['breed'],
                     price: BookingList[index]['price'],
-                    qty: BookingList[index]['age'],
                     func: () {
                       var alertDialog = MyAlertDialogueClass(
                           title: "Are you sure you want to Delete",
@@ -52,8 +46,8 @@ class AdminUserDetailsViewClass extends StatelessWidget {
                           yes: "Delete",
                           no: "Cancel",
                           onYesPressed: () {
-                            Provider.of<AddDetails>(context, listen: false)
-                                .deletePetDetails(snapshot.data.docs[index].id);
+                            Provider.of<AdminController>(context, listen: false)
+                                .deleteBookings(snapshot.data.docs[index].id);
                             Navigator.pop(context);
                             Fluttertoast.showToast(msg: "Deleted");
                           },

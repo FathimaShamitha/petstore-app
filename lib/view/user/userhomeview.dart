@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petstore/Widgets/customtext.dart';
 import 'package:petstore/Widgets/homeappbar.dart';
-import 'package:petstore/user/view/userbookingsview.dart';
-import 'package:petstore/user/view/userpetview.dart';
+import 'package:petstore/view/user/userbookingsview.dart';
+import 'package:petstore/view/user/userpetview.dart';
 
 import '../../Widgets/homecarouselslider.dart';
 import '../../Widgets/simplelisttile.dart';
+import '../../Widgets/userhomehead.dart';
 import '../../home/login.dart';
+import '../../utilities/textstyles.dart';
 import 'homepetstream.dart';
 
 class UserHomeClass extends StatelessWidget {
@@ -28,7 +30,6 @@ class UserHomeClass extends StatelessWidget {
         },
       ),
       drawer: Drawer(
-        backgroundColor: Colors.purple[100],
         width: MediaQuery.of(context).size.width * 0.6,
         child: SingleChildScrollView(
           child: Column(
@@ -72,30 +73,7 @@ class UserHomeClass extends StatelessWidget {
         width: wth,
         child: ListView(
           children: [
-            Card(
-              color: Colors.purple[200],
-              child: Container(
-                height: ht * 0.3,
-                width: wth,
-                child: Column(
-                  children: [
-                    Image(
-                      image: AssetImage("assets/images/homeview.jpg"),
-                      fit: BoxFit.fitWidth,
-                    ),
-                    Center(
-                        child: Text(
-                      "Find Your Best Companion With Us",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.bold),
-                    )),
-                  ],
-                ),
-              ),
-            ),
+            MyUserHeadClass(),
             MyCustomTextClass(txt: "Popular Pets"),
             MyCarouselClass(),
             MyCustomTextClass(txt: "Store"),
@@ -109,10 +87,7 @@ class UserHomeClass extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => const UserPetsViewClass()));
                   },
-                  child: const Text(
-                    "View All->",
-                    style: TextStyle(color: Colors.blue),
-                  )),
+                  child: Text("View All->", style: MyTextStyle.newText)),
             ),
             /*MyCustomTextClass(txt: "Pet Foods"),
             SizedBox(

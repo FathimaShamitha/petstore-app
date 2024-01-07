@@ -10,7 +10,7 @@ class MyTabClass extends StatelessWidget {
     return Tab(
       child: Text(
         title,
-        style: MyTextStyle.bodyText
+        style: MyTextStyle.tabText
       ),
     );
   }

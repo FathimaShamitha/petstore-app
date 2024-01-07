@@ -1,14 +1,14 @@
+/*
 import 'package:flutter/material.dart';
-import 'package:petstore/Widgets/simpletab.dart';
-import 'package:petstore/user/view/userallpetsview.dart';
-import 'package:petstore/user/view/usercatsview.dart';
-import 'package:petstore/user/view/userdogsview.dart';
-import 'package:petstore/utilities/colors.dart';
 
+import '../../Widgets/simpletab.dart';
 import '../../utilities/constants.dart';
+import 'adminallfoodsview.dart';
+import 'admincatfoodview.dart';
+import 'admindogfoodview.dart';
 
-class UserPetsViewClass extends StatelessWidget {
-  const UserPetsViewClass({Key? key}) : super(key: key);
+class FoodViewClass extends StatelessWidget {
+  const FoodViewClass({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,26 +17,28 @@ class UserPetsViewClass extends StatelessWidget {
         initialIndex: 0,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: MyAppColor.primaryColor,
+            backgroundColor: Colors.orange,
             title: Text(
               MyConstants().appTitle,
+              style: const TextStyle(color: Colors.white),
             ),
             bottom: const TabBar(
               tabs: [
                 MyTabClass(title: 'All'),
-                MyTabClass(title: 'Dogs'),
-                MyTabClass(title: 'Cats'),
+                MyTabClass(title: 'DogFood'),
+                MyTabClass(title: 'CatFood')
               ],
               indicatorColor: Colors.white,
             ),
           ),
           body: const TabBarView(
             children: [
-              UserAllPetsClass(),
-              UserDogViewClass(),
-              UserCatViewClass()
+              AdminAllFoodClass(),
+              AdminDogFoodViewClass(),
+              AdminCatFoodViewClass()
             ],
           ),
         ));
   }
 }
+*/

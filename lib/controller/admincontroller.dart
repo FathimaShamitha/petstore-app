@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
-class AddDetails extends ChangeNotifier {
+class AdminController extends ChangeNotifier {
   addPetDetails(type, breed, color, age, gender, price, image) async {
     var dbRef = await FirebaseFirestore.instance.collection("Pets").add({
       "type": type,
@@ -35,6 +35,11 @@ class AddDetails extends ChangeNotifier {
 
   deleteFoodDetails(String id) async {
     await FirebaseFirestore.instance.collection("Foods").doc(id).delete();
+    notifyListeners();
+  }
+
+  deleteBookings(String id) async{
+    await FirebaseFirestore.instance.collection("Bookings").doc(id).delete();
     notifyListeners();
   }
 }

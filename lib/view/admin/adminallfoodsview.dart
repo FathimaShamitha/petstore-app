@@ -1,11 +1,12 @@
+/*
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petstore/Widgets/listtile.dart';
+import 'package:petstore/controller/admincontroller.dart';
 import 'package:provider/provider.dart';
 
 import '../../Widgets/alertdialogue.dart';
-import '../controller/adddetailscontroller.dart';
 import 'adminfooddetailsview.dart';
 
 class AdminAllFoodClass extends StatelessWidget {
@@ -55,7 +56,7 @@ class AdminAllFoodClass extends StatelessWidget {
                             yes: "Delete",
                             no: "Cancel",
                             onYesPressed: () {
-                              Provider.of<AddDetails>(context, listen: false)
+                              Provider.of<AdminController>(context, listen: false)
                                   .deleteFoodDetails(
                                       snapshot.data.docs[index].id);
                               Navigator.pop(context);
@@ -82,3 +83,4 @@ class AdminAllFoodClass extends StatelessWidget {
     );
   }
 }
+*/

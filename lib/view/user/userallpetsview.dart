@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:petstore/user/view/petdetailsview.dart';
+import 'package:petstore/utilities/colors.dart';
+import 'package:petstore/view/user/petdetailsview.dart';
 
 import '../../Widgets/customwidget1.dart';
 
@@ -15,9 +16,9 @@ class UserAllPetsClass extends StatelessWidget {
         stream: FirebaseFirestore.instance.collection("Pets").snapshots(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
+            return Center(
               child: CircularProgressIndicator(
-                color: Colors.purple,
+                color: MyAppColor.primaryColor,
               ),
             );
           }
@@ -60,8 +61,11 @@ class UserAllPetsClass extends StatelessWidget {
                                   price: snapshot.data.docs[index]['price']),
                               CircleAvatar(
                                 radius: 20,
-                                child: Icon(Icons.done_all_outlined),
-                                backgroundColor: Colors.purple,
+                                child: Icon(
+                                  Icons.done_all_outlined,
+                                  color: MyAppColor.primaryColor,
+                                ),
+                                backgroundColor: MyAppColor.primaryColor1,
                               )
                             ],
                           ),

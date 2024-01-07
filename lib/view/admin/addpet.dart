@@ -2,12 +2,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petstore/Widgets/appbar.dart';
+import 'package:petstore/controller/admincontroller.dart';
 import 'package:provider/provider.dart';
 
 import '../../Widgets/simpletextfield.dart';
+import '../../controller/imagecontroller.dart';
 import '../../utilities/constants.dart';
-import '../controller/adddetailscontroller.dart';
-import '../controller/imagecontroller.dart';
 
 class AddPetsClass extends StatefulWidget {
   const AddPetsClass({Key? key}) : super(key: key);
@@ -28,7 +28,7 @@ class _AddPetsClassState extends State<AddPetsClass> {
 
   @override
   Widget build(BuildContext context) {
-    final petDetailsObj = Provider.of<AddDetails>(context);
+    final petDetailsObj = Provider.of<AdminController>(context);
     final imageObj = Provider.of<ImageUpload>(context);
     final double ht = MediaQuery.of(context).size.height;
     final double wth = MediaQuery.of(context).size.width;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:petstore/Widgets/simpletab.dart';
-import 'package:petstore/user/view/userallfoodsview.dart';
-import 'package:petstore/user/view/usercatfoodview.dart';
-import 'package:petstore/user/view/userdogfoodview.dart';
+import 'package:petstore/view/user/userallfoodsview.dart';
+import 'package:petstore/view/user/usercatfoodview.dart';
+import 'package:petstore/view/user/userdogfoodview.dart';
 
 import '../../utilities/constants.dart';
 

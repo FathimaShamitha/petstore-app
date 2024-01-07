@@ -2,11 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petstore/Widgets/homeappbar.dart';
-import 'package:petstore/admin/view/addpet.dart';
-import 'package:petstore/admin/view/petsview.dart';
-import 'package:petstore/admin/view/usersview.dart';
+import 'package:petstore/utilities/textstyles.dart';
+import 'package:petstore/view/admin/petsview.dart';
+import 'package:petstore/view/admin/usersview.dart';
 import '../../Widgets/card.dart';
 import '../../home/login.dart';
+import 'addpet.dart';
 
 class AdminHomeClass extends StatelessWidget {
   const AdminHomeClass({Key? key}) : super(key: key);
@@ -35,13 +36,7 @@ class AdminHomeClass extends StatelessWidget {
                 padding: const EdgeInsets.only(
                   left: 10,
                 ),
-                child: Text(
-                  'Add Details ',
-                  style: TextStyle(
-                      color: Colors.purple,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
-                ),
+                child: Text('Add Details ', style: MyTextStyle.headLineText),
               ),
               InkWell(
                   onTap: () {
@@ -63,13 +58,7 @@ class AdminHomeClass extends StatelessWidget {
                 padding: const EdgeInsets.only(
                   left: 10,
                 ),
-                child: Text(
-                  'View Details ',
-                  style: TextStyle(
-                      color: Colors.purple,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
-                ),
+                child: Text('View Details ', style: MyTextStyle.headLineText),
               ),
               InkWell(
                   onTap: () {

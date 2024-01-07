@@ -39,7 +39,7 @@ class _MyCarouselClassState extends State<MyCarouselClass> {
                       height: 10,
                     ),
                     Text(MyConstants().petNames[index],
-                        style: MyTextStyle.titleText)
+                        style: MyTextStyle.headText)
                   ],
                 ),
               );

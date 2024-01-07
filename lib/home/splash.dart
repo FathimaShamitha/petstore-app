@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
-import '../admin/view/adminhome.dart';
-import '../user/view/userhomeview.dart';
+import 'package:petstore/utilities/colors.dart';
+import 'package:petstore/utilities/textstyles.dart';
+import '../Widgets/headWidget.dart';
 import '../utilities/constants.dart';
+import '../view/admin/adminhome.dart';
+import '../view/user/userhomeview.dart';
 import 'login.dart';
 
 class SplashScreenClass extends StatefulWidget {
@@ -18,7 +20,7 @@ class _SplashScreenClassState extends State<SplashScreenClass> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(seconds: 6), () {
       var ref = FirebaseAuth.instance;
       User? user = ref.currentUser;
       if (user == null) {
@@ -43,16 +45,7 @@ class _SplashScreenClassState extends State<SplashScreenClass> {
         child: SizedBox(
           height: 300,
           width: 300,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 200,
-                width: 200,
-                child: Lottie.asset("assets/lottiefiles/splash.json"),
-              ),
-              Text('PetStore',style: TextStyle(color: Colors.orange,fontWeight: FontWeight.bold,fontSize: 25),)
-            ],
-          ),
+          child: MyHeadingClass(txt: 'PetStore',)
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:petstore/Widgets/appbar.dart';
+import 'package:petstore/Widgets/simpletext.dart';
 import 'package:petstore/utilities/textstyles.dart';
 
 class AdminPetDetailsViewClass extends StatefulWidget {
@@ -47,33 +48,30 @@ class _AdminPetDetailsViewState extends State<AdminPetDetailsViewClass> {
                 ),
                 const Divider(),
                 Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 10, top: 10, bottom: 10, right: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Breed : ${snapshot.data['breed']}",
-                            style: MyTextStyle.bigText),
-                        const Divider(),
-                        Text("Age : ${snapshot.data['age']}",
-                            style: MyTextStyle.smallText),
-                        const Divider(),
-                        Text("Fur : ${snapshot.data['fur']}",
-                            style: MyTextStyle.smallText),
-                        const Divider(),
-                        Text("Gender : ${snapshot.data['gender']}",
-                            style: MyTextStyle.smallText),
-                        const Divider(),
-                        Text("Price : ${snapshot.data['price']}",
-                            style: MyTextStyle.smallText),
-                        const Divider(),
-                        Center(
-                          child: ElevatedButton(
-                              onPressed: () {}, child: Text('Edit')),
-                        )
-                      ],
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MyTextClass(
+                          title: "Breed", content: "${snapshot.data['breed']}"),
+                      const Divider(),
+                      MyTextClass(
+                          title: "Age", content: "${snapshot.data['age']}"),
+                      const Divider(),
+                      MyTextClass(
+                          title: "Fur", content: "${snapshot.data['fur']}"),
+                      const Divider(),
+                      MyTextClass(
+                          title: "Gender",
+                          content: "${snapshot.data['gender']}"),
+                      const Divider(),
+                      MyTextClass(
+                          title: "Price", content: "${snapshot.data['price']}"),
+                      const Divider(),
+                      /*Center(
+                        child: ElevatedButton(
+                            onPressed: () {}, child: Text('Edit')),
+                      )*/
+                    ],
                   ),
                 ),
               ],

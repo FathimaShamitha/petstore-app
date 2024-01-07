@@ -5,7 +5,7 @@ import 'package:petstore/Widgets/listtile.dart';
 import 'package:provider/provider.dart';
 
 import '../../Widgets/alertdialogue.dart';
-import '../controller/adddetailscontroller.dart';
+import '../../controller/admincontroller.dart';
 import 'adminpetdetailsview.dart';
 
 class AdminDogsViewClass extends StatelessWidget {
@@ -49,16 +49,17 @@ class AdminDogsViewClass extends StatelessWidget {
                       image: dogList[index]['imageurl'],
                       name: dogList[index]['breed'],
                       price: dogList[index]['price'],
-                      qty: dogList[index]['age'],
                       func: () {
                         var alertDialog = MyAlertDialogueClass(
                             title: "Are you sure you want to Delete",
                             content: "This action will permanently delete data",
                             yes: "Delete",
                             no: "Cancel",
-                            onYesPressed: ()  {
-                              Provider.of<AddDetails>(context, listen: false)
-                                  .deletePetDetails(snapshot.data.docs[index].id);
+                            onYesPressed: () {
+                              Provider.of<AdminController>(context,
+                                      listen: false)
+                                  .deletePetDetails(
+                                      snapshot.data.docs[index].id);
                               Navigator.pop(context);
                               Fluttertoast.showToast(msg: "Deleted");
                             },

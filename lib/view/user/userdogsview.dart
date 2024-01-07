@@ -1,22 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:petstore/view/user/petdetailsview.dart';
 
 import '../../Widgets/customwidget1.dart';
-import 'fooddetailsview.dart';
 
-class UserAllFoodsClass extends StatelessWidget {
-  const UserAllFoodsClass({Key? key}) : super(key: key);
+class UserDogViewClass extends StatelessWidget {
+  const UserDogViewClass({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection("Foods").snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection("Pets")
+            .where('type', isEqualTo: 'Dog')
+            .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(
-                color: Colors.orange,
+                color: Colors.purple,
               ),
             );
           }
@@ -31,7 +34,7 @@ class UserAllFoodsClass extends StatelessWidget {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 1,
-                    childAspectRatio: 0.7,
+                    childAspectRatio: 0.9,
                     crossAxisSpacing: 2),
                 itemBuilder: (context, index) {
                   return InkWell(
@@ -39,13 +42,13 @@ class UserAllFoodsClass extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => UserFoodDetailsClass(
+                              builder: (context) => UserPetDetailsClass(
                                     docId: snapshot.data.docs[index].id,
                                   )));
                     },
                     child: MyColumnClass(
-                        imageUrl: snapshot.data.docs[index]['image'],
-                        name: snapshot.data.docs[index]['name'],
+                        imageUrl: snapshot.data.docs[index]['imageurl'],
+                        name: snapshot.data.docs[index]['breed'],
                         price: snapshot.data.docs[index]['price']),
                   );
                 });

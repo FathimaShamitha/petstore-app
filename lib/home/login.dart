@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:petstore/admin/view/adminhome.dart';
-import 'package:petstore/user/view/register.dart';
 import 'package:petstore/utilities/constants.dart';
+import 'package:petstore/utilities/textstyles.dart';
 
-import '../user/view/userhomeview.dart';
+import '../Widgets/headWidget.dart';
+import '../view/admin/adminhome.dart';
+import '../view/user/register.dart';
+import '../view/user/userhomeview.dart';
 import '../utilities/colors.dart';
 
 class LoginClass extends StatefulWidget {
@@ -26,23 +28,12 @@ class LoginClassState extends State<LoginClass> {
             key: formKey,
             child: Column(
               children: [
-                SizedBox(
-                  height: 200,
-                  child: Image(image: AssetImage("assets/images/cat_dog.jpg")),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: Text(
-                    "Login",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 50,
-                        color: MyAppColor.primaryColor),
-                  ),
+                MyHeadingClass(
+                  txt: 'Login',
                 ),
                 Padding(
                   padding:
-                  const EdgeInsets.only(left: 30, right: 30, bottom: 20),
+                      const EdgeInsets.only(left: 30, right: 30, bottom: 20),
                   child: TextFormField(
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -59,7 +50,7 @@ class LoginClassState extends State<LoginClass> {
                 ),
                 Padding(
                   padding:
-                  const EdgeInsets.only(left: 30, right: 30, bottom: 40),
+                      const EdgeInsets.only(left: 30, right: 30, bottom: 40),
                   child: TextFormField(
                     controller: passwordController,
                     obscureText: true,
@@ -76,15 +67,13 @@ class LoginClassState extends State<LoginClass> {
                   ),
                 ),
                 ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.purple[400]),
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
                         try {
                           var auth_ref = await FirebaseAuth.instance
                               .signInWithEmailAndPassword(
-                              email: emailController.text,
-                              password: passwordController.text);
+                                  email: emailController.text,
+                                  password: passwordController.text);
                           User? user = auth_ref.user;
                           if (user!.uid == MyConstants().adminID) {
                             Navigator.pushReplacement(
@@ -106,15 +95,11 @@ class LoginClassState extends State<LoginClass> {
                     },
                     child: Text(
                       "Login",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
                     )),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "New User?",
-                      style: TextStyle(color: Colors.blue, fontSize: 15),
-                    ),
+                    Text("New User?", style: MyTextStyle.newText),
                     TextButton(
                         onPressed: () {
                           Navigator.push(
@@ -122,10 +107,7 @@ class LoginClassState extends State<LoginClass> {
                               MaterialPageRoute(
                                   builder: (context) => RegisterClass()));
                         },
-                        child: Text(
-                          "Register",
-                          style: TextStyle(fontSize: 15, color: Colors.blue),
-                        ))
+                        child: Text("Register", style: MyTextStyle.newText))
                   ],
                 ),
               ],

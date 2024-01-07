@@ -1,10 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:petstore/controller/admincontroller.dart';
 import 'package:petstore/utilities/apptheme.dart';
 import 'package:provider/provider.dart';
-
-import 'admin/controller/adddetailscontroller.dart';
-import 'admin/controller/imagecontroller.dart';
+import 'controller/imagecontroller.dart';
 import 'home/splash.dart';
 
 void main() async {
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ImageUpload()),
-        ChangeNotifierProvider(create: (context) => AddDetails()),
+        ChangeNotifierProvider(create: (context) => AdminController()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
